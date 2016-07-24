@@ -1,19 +1,39 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
-const WaypointListRow = ({wayPoint, onEdit}) => {
-  if (wayPoint === null) return (<tr><td colSpan="42">Null Waypoint</td></tr>);
-  return (
-    <tr>
-      <td><Link to={'/trip/' + wayPoint.tripId}>{wayPoint.name}</Link></td>
-      <td>{wayPoint.description} <a onClick = {onEdit}>inline</a></td>
-    </tr>
-  );
-};
+class WaypointListRow extends React.Component {
+    constructor(props, context)    {
+        super(props, context);
+
+        this.onLocalEdit = this.onLocalEdit.bind(this);
+        this.onLocalDelete = this.onLocalDelete.bind(this);
+
+    }
+
+    onLocalEdit()
+    {
+      this.props.onEdit(this.props.wayPoint);
+    }
+
+	  onLocalDelete()
+    {
+      this.props.onDelete(this.props.wayPoint);
+    }
+
+    render() {
+        return (
+          <tr>
+            <td><a onClick = {this.onLocalEdit}>edit</a> <a onClick = {this.onLocalDelete}>delete</a></td>
+            <td>{this.props.wayPoint.name}</td>
+          </tr>
+        );
+    }
+}
 
 WaypointListRow.propTypes = {
   wayPoint: PropTypes.object.isRequired,
-  onEdit : PropTypes.function
+  onEdit : PropTypes.function,
+  onDelete : PropTypes.function
 };
 
 export default WaypointListRow;

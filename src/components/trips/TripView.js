@@ -19,9 +19,8 @@ export class TripView extends React.Component {
       errors: {},
       saving: false
     };
-    this.onEdit = this.onEdit.bind(this);
-    this.saveTrip = this.saveTrip.bind(this);
-    this.updateTripState = this.updateTripState.bind(this);
+    this.onEditWaypoint = this.onEditWaypoint.bind(this);
+    this.onDeleteWaypoint = this.onDeleteWaypoint.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -31,55 +30,29 @@ export class TripView extends React.Component {
     }
   }
 
-  updateTripState(event) {
-    const field = event.target.name;
-    let trip = this.state.trip;
-    trip[field] = event.target.value;
-    return this.setState({trip: trip});
+  onEditWaypoint(waypoint)
+  {
+    alert('edit-' + waypoint.waypointId);
   }
-
-  tripFormIsValid() {
-    let formIsValid = true;
-    let errors = {};
-
-    if (this.state.trip.title.length < 5) {
-      errors.title = 'Title must be at least 5 characters.';
-      formIsValid = false;
-    }
-
-    this.setState({errors: errors});
-    return formIsValid;
-  }
-
-  saveTrip(event) {
-    event.preventDefault();
-    if (!this.tripFormIsValid()) {
-      return;
-    }
-
-    this.setState({saving: true});
-    this.props.actions.saveTrip(this.state.trip)
-      .then(() => { 
-        this.redirect();
-      })
-      .catch(error => {
-        toastr.error(error);
-        this.setState({saving: false});
-      });
-  }
-
-  redirect() {
-    this.setState({saving: false});
-    toastr.success('Trip saved.');
-    this.context.router.push('/trips');
+  
+  onDeleteWaypoint(waypoint)
+  {
+    alert('delete-' + waypoint.waypointId);
   }
 
   render() {
     try {
-      return (
-          <div>
+      return (   
+        <div className=""> 
+          <div className="row well">
             <TripHeader trip={this.state.trip}/>
-              <WaypointList wayPoints={this.state.trip.wayPoints} onEdit={this.onEdit}/>
+            <div className="col-md-4">
+              <WaypointList wayPoints={this.state.trip.wayPoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
+            </div>
+            <div className="col-md-4">
+                <WaypointList wayPoints={this.state.trip.wayPoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
+            </div>          
+          </div>
         </div>
       );
     }
@@ -87,11 +60,6 @@ export class TripView extends React.Component {
     {
       return (<div>error in TripView</div>);
     }
-  }
-
-  onEdit()
-  {
-    alert('here');
   }
   
 }

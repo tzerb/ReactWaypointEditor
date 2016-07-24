@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import WaypointListRow from './WaypointListRow';
 
-const WaypointList = ({wayPoints, onEdit}) => {
+const WaypointList = ({wayPoints, onEdit, onDelete}) => {
   return (
     <div>
 
@@ -18,13 +18,13 @@ const WaypointList = ({wayPoints, onEdit}) => {
       <table className="table">
           <thead>
           <tr>
+            <th width="140"></th>
             <th>Title</th>
-            <th>Description</th>
           </tr>
           </thead>
           <tbody>
             {wayPoints.map(wayPoint =>
-              <WaypointListRow key={wayPoint.waypointId} wayPoint={wayPoint} onEdit={onEdit} />
+              <WaypointListRow key={wayPoint.waypointId} wayPoint={wayPoint} onEdit={onEdit} onDelete={onDelete}/>
             )} 
           </tbody>
         </table>
