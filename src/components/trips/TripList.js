@@ -7,7 +7,7 @@ const TripList = ({trips}) => {
       <thead>
       <tr>
         <th>Title</th>
-        <th>Location</th>
+        <th>Description</th>
       </tr>
       </thead>
       <tbody>

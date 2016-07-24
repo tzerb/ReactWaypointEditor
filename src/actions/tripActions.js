@@ -42,7 +42,7 @@ export function saveTrip(trip) {
         }
         else
         {
-            dispatch(createTripSuccess(trip))
+            dispatch(createTripSuccess(trip));
         }
     }).catch(error => {
       dispatch(ajaxCallError(error));

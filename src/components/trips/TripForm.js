@@ -1,6 +1,8 @@
 import React, {PropTypes} from 'react';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
+import TextInputBig from '../common/TextInputBig';
+import DateTime from '../common/DateTime';
 
 const TripForm = ({trip, onSave, onChange, saving, errors}) => {
   return (
@@ -13,12 +15,27 @@ const TripForm = ({trip, onSave, onChange, saving, errors}) => {
         onChange={onChange}
         error={errors.title}/>
 
+      <TextInputBig
+        name="description"
+        label="Description"
+        value={trip.description}
+        onChange={onChange}
+        error={errors.description}/>
+
+      <TextInputBig
+        name="dateTime"
+        label="DateTime"
+        value={trip.dateTime}
+        onChange={onChange}
+        error={errors.dateTime}/>
+
       <input
         type="submit"
         disabled={saving}
         value={saving ? 'Saving...' : 'Save'}
         className="btn btn-primary"
         onClick={onSave}/>
+        
     </form>
   );
 };
