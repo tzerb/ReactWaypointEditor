@@ -9,7 +9,7 @@ const trips = [
   "title": "7/7/2016",
   "description": "07/07/2016",
   "dateTime": "2016-07-07T00:00:00",
-  "tracks": [],
+  "tracks": [{trackId:1}],
   "wayPoints": [
     {
       "latitude": 43.905967197,
@@ -40,7 +40,7 @@ const trips = [
   "title": "7/8/2016",
   "description": "07/07/2016",
   "dateTime": "2016-07-07T00:00:00",
-  "tracks": [],
+  "tracks": [{trackId:2}],
   "wayPoints": [
     {
       "latitude": 43.905967197,
@@ -52,7 +52,18 @@ const trips = [
       "depth": 0,
       "type": 0,
       "visible": false
-    }
+    },
+    {
+      "latitude": 43.905967197,
+      "longitude": -88.428131393,
+      "waypointId": 3,
+      "dateTime": "2016-07-07T18:49:39",
+      "description": "TESTER",
+      "name": "TESTER",
+      "depth": 0,
+      "type": 0,
+      "visible": false
+    }    
   ],
   "pictures": [
     {
@@ -80,6 +91,7 @@ const generateId = (trip) => {
 class TripApi {
 
   static getAllTrips() {
+    //alert('getAllTrips');
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(Object.assign([], trips));

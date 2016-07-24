@@ -1,7 +1,7 @@
 {
   "name": "ps-redux",
   "version": "1.0.0",
-  "description": "Starter kit for React and Redux Pluralsight course by Cory House",
+  "description": "React Waypoint Editor",
   "scripts": {
     "prestart": "babel-node tools/startMessage.js",
     "start": "npm-run-all --parallel test:watch open:src lint:watch",
@@ -25,6 +25,7 @@
     "jquery": "2.2.3",
     "react": "15.0.2",
     "react-dom": "15.0.2",
+    "react-modal": "1.4.0",
     "react-redux": "4.4.5",
     "react-router": "2.4.0",
     "react-router-redux": "4.0.4",
@@ -71,6 +72,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/coryhouse/pluralsight-redux-starter"
+    "url": "https://github.com/tzerb/ReactWaypointEditor"
   }
 }

@@ -1,35 +1,43 @@
 import React, {PropTypes} from 'react';
 import TextInput from '../common/TextInput';
-import SelectInput from '../common/SelectInput';
 import TextInputBig from '../common/TextInputBig';
 import DateTime from '../common/DateTime';
+import LocationInput from '../common/LocationInput';
 
-const TripForm = ({trip, onSave, onChange, saving, errors}) => {
+const WaypointForm = ({wayPoint, onSave, onChange, saving, errors}) => {
   try {
 
     return (
       <form>
-        <h1>Manage Trip {trip.wayPoints.length} </h1>
+        <h1>Manage wayPoint</h1>
         <TextInput
-          name="title"
-          label="Title"
-          value={trip.title}
+          name="name"
+          label="Name"
+          value={wayPoint.name}
           onChange={onChange}
-          error={errors.title}/>
+          error={errors.name}/>
 
         <TextInputBig
           name="description"
           label="Description"
-          value={trip.description}
+          value={wayPoint.description}
           onChange={onChange}
           error={errors.description}/>
 
-        <TextInputBig
+        <DateTime
           name="dateTime"
           label="DateTime"
-          value={trip.dateTime}
+          value={wayPoint.dateTime}
           onChange={onChange}
           error={errors.dateTime}/>
+
+        <LocationInput
+          name="location"
+          label="Location"
+          latitude = {wayPoint.latitude}
+          longitude = {wayPoint.longitude}
+          onChange={onChange}
+          error={errors.location}/>
 
         <input
           type="submit"
@@ -37,22 +45,22 @@ const TripForm = ({trip, onSave, onChange, saving, errors}) => {
           value={saving ? 'Saving...' : 'Save'}
           className="btn btn-primary"
           onClick={onSave}/>
-          
+
       </form>
     );
   } catch (ex)
   {
-    return (<div>Error rendering TripForm</div>); 
+    return (<div>Error rendering WaypointForm</div>); 
   }
 
 };
 
-TripForm.propTypes = {
-  trip: PropTypes.object.isRequired,
+WaypointForm.propTypes = {
+  wayPoint: PropTypes.object.isRequired,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   saving: PropTypes.bool,
   errors: PropTypes.object
 };
 
-export default TripForm;
+export default WaypointForm;

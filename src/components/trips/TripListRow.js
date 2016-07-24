@@ -4,8 +4,9 @@ import {Link} from 'react-router';
 const TripListRow = ({trip}) => {
   return (
     <tr>
-      <td><Link to={'/trip/' + trip.tripId}>{trip.title}</Link></td>
+      <td><Link to={'/tripview/' + trip.tripId}>{trip.title}</Link></td>
       <td>{trip.description}</td>
+      <td><Link to={'/trip/' + trip.tripId}>Edit</Link></td>
     </tr>
   );
 };
