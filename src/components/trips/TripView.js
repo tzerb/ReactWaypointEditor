@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import toastr from 'toastr';
 
 import * as tripActions from '../../actions/tripActions';
+import * as waypointActions from '../../actions/waypointActions';
 
 import TripHeader from './TripHeader';
 
@@ -37,7 +38,8 @@ export class TripView extends React.Component {
   
   onDeleteWaypoint(waypoint)
   {
-    alert('delete-' + waypoint.waypointId);
+    //alert('delete-' + waypoint.waypointId);
+    this.props.waypointActions.deleteWaypoint(waypoint);
   }
 
   render() {
@@ -66,7 +68,8 @@ export class TripView extends React.Component {
 
 TripView.propTypes = {
   trip: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  waypointActions: PropTypes.object.isRequired
 };
 
 //Pull in the React Router context so router is available on this.context.router.
@@ -81,6 +84,7 @@ function getTripById(trips, tripId) {
 }
 
 function mapStateToProps(state, ownProps) {
+  alert('mapStateToProps');
   const tripId = ownProps.params.id; // from the path `/trip/:id`
 
   let trip = {id: '', title: '' };
@@ -95,8 +99,10 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
+  alert('mapDispatchToProps');
   return {
-    actions: bindActionCreators(tripActions, dispatch)
+    actions: bindActionCreators(tripActions, dispatch),
+    waypointActions: bindActionCreators(waypointActions, dispatch)
   };
 }
 

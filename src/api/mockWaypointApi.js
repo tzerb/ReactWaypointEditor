@@ -51,6 +51,7 @@ class WaypointApi {
   }
 
   static deleteWaypoint(waypointId) {
+    alert('deleteWaypoint');
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         const indexOfWaypointToDelete = waypoints.findIndex(waypoint => {

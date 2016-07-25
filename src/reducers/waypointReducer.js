@@ -20,6 +20,11 @@ export default function waypointReducer(state = initialState.waypoints, action) 
             Object.assign({}, action.waypoint)
         ];
 
+        case types.DELETE_WAYPOINT_SUCCESS:
+        return [
+            ...state.filter(waypoint => waypoint.waypointId !== action.waypoint.waypointId)
+        ];
+
         default:
             return state;
     }

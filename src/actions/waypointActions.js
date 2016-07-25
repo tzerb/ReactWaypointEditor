@@ -22,6 +22,11 @@ export function saveWaypointSuccess(waypoint)
     return {type: types.SAVE_WAYPOINT_SUCCESS, waypoint};
 }
 
+export function deleteWaypointSuccess(waypoint)
+{
+    return {type: types.DELETE_WAYPOINT_SUCCESS, waypoint};
+}
+
 export function loadWaypoints() {
     return function (dispatch){
         return WaypointApi.getAllWaypoints().then(waypoints => {
@@ -50,3 +55,16 @@ export function saveWaypoint(waypoint) {
     });
   };
 }
+
+export function deleteWaypoint(waypoint) {
+  return function (dispatch, getState) {
+    dispatch(beginAjaxCall());
+    return WaypointApi.deleteWaypoint(waypoint).then(waypoint => {
+        dispatch(deleteWaypointSuccess(waypoint));
+    }).catch(error => {
+      dispatch(ajaxCallError(error));
+      throw(error);
+    });
+  };
+}
+
