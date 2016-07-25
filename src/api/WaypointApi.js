@@ -18,58 +18,66 @@ const generateId = (waypoint) => {
 class WaypointApi {
 
   static getAllWaypoints() {
-    //alert('getAllWaypoints');
     return new Promise((resolve, reject) => {
-        $.ajax({
-            url: "http://localhost:15989/api/Waypoint", 
-            success: function(result){
-                alert('success');
-            },
-            fail: function(result){
-                alert('fail');
-            }
-        });
-      setTimeout(() => {
-        resolve(Object.assign([], waypoints));
-      }, delay);
+      $.ajax({
+        url: "http://localhost:15989/api/Waypoint",
+        context: document.body
+      }).success(function(waypointList) {
+        resolve(Object.assign([], waypointList));
+      }).fail(function() {
+        reject('Ajax call for getAllWaypoints failed');
+      });
+
     });
   }
 
   static saveWaypoint(waypoint) {
     waypoint = Object.assign({}, waypoint); // to avoid manipulating object passed in.
     return new Promise((resolve, reject) => {
-      setTimeout(() => {
         // Simulate server-side validation
         const minWaypointTitleLength = 1;
-        if (waypoint.title.length < minWaypointTitleLength) {
+        if (waypoint.name.length < minWaypointTitleLength) {
           reject(`Title must be at least ${minWaypointTitleLength} characters.`);
         }
         if (waypoint.waypointId) {
-          const existingWaypointIndex = waypoints.findIndex(a => a.waypointId == waypoint.waypointId);
-          waypoints.splice(existingWaypointIndex, 1, waypoint);
+          $.ajax({
+            method: "PUT",
+            url: "http://localhost:15989/api/Waypoint",
+            data: waypoint,
+            context: document.body
+          }).success(function(waypoint) {
+            resolve(Object.assign([], waypoint));
+          }).fail(function() {
+            reject('Ajax call for getAllWaypoints failed');
+          });
         } else {
-          //Just simulating creation here.
-          //The server would generate ids and watchHref's for new waypoints in a real app.
-          //Cloning so copy returned is passed by value rather than by reference.
-          waypoint.waypointId = generateId(waypoint);
-          waypoints.push(waypoint);
+          $.ajax({
+            method: "POST",
+            url: "http://localhost:15989/api/Waypoint",
+            data: waypoint,
+            context: document.body
+          }).success(function(waypoint) {
+            resolve(Object.assign([], waypoint));
+          }).fail(function() {
+            reject('Ajax call for getAllWaypoints failed');
+          });
         }
 
-        resolve(waypoint);
-      }, delay);
     });
   }
 
   static deleteWaypoint(waypointId) {
     alert('deleteWaypoint');
     return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const indexOfWaypointToDelete = waypoints.findIndex(waypoint => {
-          waypoint.waypointId == waypointId;
-        });
-        waypoints.splice(indexOfWaypointToDelete, 1);
-        resolve();
-      }, delay);
+          $.ajax({
+            method: "DELETE",
+            url: "http://localhost:15989/api/Waypoint/" + waypointId,
+            context: document.body
+          }).success(function() {
+            resolve();
+          }).fail(function() {
+            reject('Ajax call for getAllWaypoints failed');
+          });
     });
   }
 }
