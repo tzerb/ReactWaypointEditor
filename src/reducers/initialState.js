@@ -1,6 +1,5 @@
 export default {
-  courses: [],
-  authors: [],
   trips: [],
+  waypoints: [],
   ajaxCallsInProgress: 0
 };

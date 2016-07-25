@@ -5,7 +5,7 @@ import * as tripActions from '../../actions/tripActions';
 import TripForm from './TripForm';
 import toastr from 'toastr';
 
-export class ManageTripPage extends React.Component {
+export class TripEditor extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -72,7 +72,7 @@ export class ManageTripPage extends React.Component {
   render() {
     return (
       <TripForm
-        trip={this.state.trip}
+        trip={this.props.trip}
         onChange={this.updateTripState}
         onSave={this.saveTrip}
         errors={this.state.errors}
@@ -82,40 +82,14 @@ export class ManageTripPage extends React.Component {
   }
 }
 
-ManageTripPage.propTypes = {
+TripEditor.propTypes = {
   trip: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
 };
 
 //Pull in the React Router context so router is available on this.context.router.
-ManageTripPage.contextTypes = {
+TripEditor.contextTypes = {
   router: PropTypes.object
 };
 
-function getTripById(trips, tripId) {
-  const trip = trips.filter(trip => trip.tripId == tripId);
-  if (trip) return trip[0]; //since filter returns an array, have to grab the first.
-  return null;
-}
-
-function mapStateToProps(state, ownProps) {
-  const tripId = ownProps.params.id; // from the path `/trip/:id`
-
-  let trip = {id: '', title: '' };
-
-  if (tripId && state.trips.length > 0) {
-    trip = getTripById(state.trips, tripId);
-  }
-
-  return {
-    trip: trip
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(tripActions, dispatch)
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ManageTripPage);
+export default TripEditor;

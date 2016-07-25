@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as trackActions from '../../actions/trackActions';
-import {authorsFormattedForDropdown} from '../../selectors/selectors';
 import toastr from 'toastr';
 
 export class ManageTrackPage extends React.Component {

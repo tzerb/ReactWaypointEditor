@@ -4,38 +4,38 @@ import TextInputBig from '../common/TextInputBig';
 import DateTime from '../common/DateTime';
 import LocationInput from '../common/LocationInput';
 
-const WaypointForm = ({wayPoint, onSave, onChange, saving, errors}) => {
+const WaypointForm = ({waypoint, onSave, onChange, saving, errors}) => {
   try {
 
     return (
       <form>
-        <h1>Manage wayPoint</h1>
+        <h1>Manage waypoint</h1>
         <TextInput
           name="name"
           label="Name"
-          value={wayPoint.name}
+          value={waypoint.name}
           onChange={onChange}
           error={errors.name}/>
 
         <TextInputBig
           name="description"
           label="Description"
-          value={wayPoint.description}
+          value={waypoint.description}
           onChange={onChange}
           error={errors.description}/>
 
         <DateTime
           name="dateTime"
           label="DateTime"
-          value={wayPoint.dateTime}
+          value={waypoint.dateTime}
           onChange={onChange}
           error={errors.dateTime}/>
 
         <LocationInput
           name="location"
           label="Location"
-          latitude = {wayPoint.latitude}
-          longitude = {wayPoint.longitude}
+          latitude = {waypoint.latitude}
+          longitude = {waypoint.longitude}
           onChange={onChange}
           error={errors.location}/>
 
@@ -56,7 +56,7 @@ const WaypointForm = ({wayPoint, onSave, onChange, saving, errors}) => {
 };
 
 WaypointForm.propTypes = {
-  wayPoint: PropTypes.object.isRequired,
+  waypoint: PropTypes.object.isRequired,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   saving: PropTypes.bool,

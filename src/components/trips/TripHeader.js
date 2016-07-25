@@ -7,23 +7,27 @@ const TripHeader = ({trip}) => {
   try {
 
     return (
-      <div>Header
-        <h1>Trip : {trip.title} | {trip.description} </h1>
+      <div>
+        <h1>Trip View</h1>
+        <h3>Trip : {trip.title} | {trip.description} </h3>
         <TextDisplay
           name="title"
           label="Title"
           value={trip.title}
-          />        <br/>
+          />        
+          <br/>
         <TextDisplayBig
           name="description"
           label="Description"
           value={trip.description}
-          />        <br/>      
+          />        
+          <br/>      
           <DateTimeDisplay
           name="dateTime"
           label="Date/Time"
           value={trip.dateTime}
-          />           <br/>
+          />           
+          <br/>
       </div>
 
     );

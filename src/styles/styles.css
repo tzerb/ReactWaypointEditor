@@ -6,10 +6,22 @@
   margin: 0 auto;
 }
 
+
+a {
+  cursor: pointer;
+}
+
 a.active {
   color: orange;
+  cursor: pointer; 
 }
 
 nav {
   padding-top: 20px;
+}
+
+.well {
+  outline: 1px solid darkgray;
+  display: inline-block;
+  margin: 0.5em;    
 }

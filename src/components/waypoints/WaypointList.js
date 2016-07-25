@@ -1,19 +1,19 @@
 import React, {PropTypes} from 'react';
 import WaypointListRow from './WaypointListRow';
 
-const WaypointList = ({wayPoints, onEdit, onDelete}) => {
+const WaypointList = ({waypoints, onEdit, onDelete}) => {
   return (
     <div>
 
-    {wayPoints===null &&
+    {waypoints===null &&
       <span>The list is null.</span>
     }
 
-    {wayPoints && (wayPoints.length===0) &&
+    {waypoints && (waypoints.length===0) &&
       <span>The list is empty.</span>
     }
 
-    {wayPoints && (wayPoints.length>0) &&
+    {waypoints && (waypoints.length>0) &&
 
       <table className="table">
           <thead>
@@ -23,8 +23,8 @@ const WaypointList = ({wayPoints, onEdit, onDelete}) => {
           </tr>
           </thead>
           <tbody>
-            {wayPoints.map(wayPoint =>
-              <WaypointListRow key={wayPoint.waypointId} wayPoint={wayPoint} onEdit={onEdit} onDelete={onDelete}/>
+            {waypoints.map(waypoint =>
+              <WaypointListRow key={waypoint.waypointId} waypoint={waypoint} onEdit={onEdit} onDelete={onDelete}/>
             )} 
           </tbody>
         </table>
@@ -35,8 +35,9 @@ const WaypointList = ({wayPoints, onEdit, onDelete}) => {
 };
 
 WaypointList.propTypes = {
-  wayPoints: PropTypes.array.isRequired,
-  onEdit: PropTypes.function
+  waypoints: PropTypes.array.isRequired,
+  onEdit: PropTypes.function,
+  onDelete: PropTypes.function
 };
 
 export default WaypointList;

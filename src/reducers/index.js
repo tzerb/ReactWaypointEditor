@@ -1,14 +1,11 @@
 import { combineReducers } from 'redux';
-import courses from './courseReducer';
-import authors from './authorReducer';
 import trips from './tripReducer';
-
+import waypoints from './waypointReducer';
 import ajaxCallsInProgress from './ajaxStatusReducer';
 
 const rootReducer = combineReducers({
-  courses,
-  authors,
   trips,
+  waypoints,
   ajaxCallsInProgress
 });
 

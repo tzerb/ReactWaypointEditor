@@ -44,13 +44,13 @@ export class TripView extends React.Component {
     try {
       return (   
         <div className=""> 
-          <div className="row well">
+          <div className="row">
             <TripHeader trip={this.state.trip}/>
-            <div className="col-md-4">
-              <WaypointList wayPoints={this.state.trip.wayPoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
+            <div className="col-md-3 well">
+              <WaypointList waypoints={this.state.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
             </div>
-            <div className="col-md-4">
-                <WaypointList wayPoints={this.state.trip.wayPoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
+            <div className="col-md-3 well">
+                <WaypointList waypoints={this.state.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
             </div>          
           </div>
         </div>

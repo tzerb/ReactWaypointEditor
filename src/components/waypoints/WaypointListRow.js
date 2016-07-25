@@ -12,26 +12,26 @@ class WaypointListRow extends React.Component {
 
     onLocalEdit()
     {
-      this.props.onEdit(this.props.wayPoint);
+      this.props.onEdit(this.props.waypoint);
     }
 
 	  onLocalDelete()
     {
-      this.props.onDelete(this.props.wayPoint);
+      this.props.onDelete(this.props.waypoint);
     }
 
     render() {
         return (
           <tr>
-            <td><a onClick = {this.onLocalEdit}>edit</a> <a onClick = {this.onLocalDelete}>delete</a></td>
-            <td>{this.props.wayPoint.name}</td>
+            <td><Link to={'/waypoint/'+this.props.waypoint.waypointId}>edit</Link> <a onClick = {this.onLocalEdit}>edit</a> <a onClick = {this.onLocalDelete}>delete</a></td>
+            <td>{this.props.waypoint.name}</td>
           </tr>
         );
     }
 }
 
 WaypointListRow.propTypes = {
-  wayPoint: PropTypes.object.isRequired,
+  waypoint: PropTypes.object.isRequired,
   onEdit : PropTypes.function,
   onDelete : PropTypes.function
 };

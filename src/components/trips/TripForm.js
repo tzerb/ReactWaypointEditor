@@ -9,7 +9,7 @@ const TripForm = ({trip, onSave, onChange, saving, errors}) => {
 
     return (
       <form>
-        <h1>Manage Trip {trip.wayPoints.length} </h1>
+        <h1>Manage Trip {trip.waypoints.length} </h1>
         <TextInput
           name="title"
           label="Title"

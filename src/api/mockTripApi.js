@@ -10,7 +10,7 @@ const trips = [
   "description": "07/07/2016",
   "dateTime": "2016-07-07T00:00:00",
   "tracks": [{trackId:1}],
-  "wayPoints": [
+  "waypoints": [
     {
       "latitude": 43.905967197,
       "longitude": -88.428131393,
@@ -41,7 +41,7 @@ const trips = [
   "description": "07/07/2016",
   "dateTime": "2016-07-07T00:00:00",
   "tracks": [{trackId:2}],
-  "wayPoints": [
+  "waypoints": [
     {
       "latitude": 43.905967197,
       "longitude": -88.428131393,

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as tripActions from '../../actions/tripActions';
 import TripList from './TripList';
+import TripEditor from './TripEditor';
 
 class TripPage extends React.Component {
     constructor(props, context)    {
