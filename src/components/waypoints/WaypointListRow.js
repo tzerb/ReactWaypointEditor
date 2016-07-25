@@ -15,7 +15,7 @@ class WaypointListRow extends React.Component {
       this.props.onEdit(this.props.waypoint);
     }
 
-	  onLocalDelete()
+    onLocalDelete()
     {
       this.props.onDelete(this.props.waypoint);
     }
