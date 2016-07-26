@@ -8,7 +8,7 @@ import {Provider} from 'react-redux';
 import {loadTrips} from './actions/tripActions';
 import {loadWaypoints} from './actions/waypointActions';
 import WaypointApi from './api/WaypointApi';
-
+ 
 import './styles/styles.css'; //Webpack can import CSS files too!
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/toastr/build/toastr.min.css';
@@ -18,9 +18,13 @@ import '../node_modules/toastr/build/toastr.min.css';
 //         //alert('worked'+ waypointList.length);
 //         let lastWaypointId =waypointList[waypointList.length-1].waypointId; 
 //         let w = waypointList[0];
-//         w.name=w.name+'a';
+//         w.name=w.name+'a';        
+
+//         WaypointApi.saveWaypoint(w).then((wp1) => alert('save worked ' + wp1.waypointId)).catch(() => alert('save failed'));
+        
 //         w.waypointId = null;
-//         // WaypointApi.saveWaypoint(w).then((wp) => alert('save worked ' + wp.waypointId)).catch(() => alert('save failed'))
+//         WaypointApi.saveWaypoint(w).then((wp2) => alert('create worked ' + wp2.waypointId)).catch(() => alert('create failed'));
+        
 //         WaypointApi.deleteWaypoint(lastWaypointId).then(() => alert('delete worked')).catch((msg) => alert('delete failed: ' + msg));
 //       })
 //     .catch(function (msg ) { 

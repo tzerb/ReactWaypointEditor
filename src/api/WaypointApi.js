@@ -17,15 +17,37 @@ const generateId = (waypoint) => {
 
 class WaypointApi {
 
+  static formatErrorMessage(jqXHR, exception) {
+    //http://stackoverflow.com/questions/377644/jquery-ajax-error-handling-show-custom-exception-messages
+    if (jqXHR.status === 0) {
+        return ('Not connected.\nPlease verify your network connection.');
+    } else if (jqXHR.status == 404) {
+        return ('The requested page not found. [404]');
+    } else if (jqXHR.status == 500) {
+        let jsonValue = $.parseJSON( jqXHR.responseText );
+        return ('Internal Server Error [500].\r\n' + (jsonValue && jsonValue.exceptionMessage) ? jsonValue.exceptionMessage : "");
+    } else if (exception === 'parsererror') {
+        return ('Requested JSON parse failed.');
+    } else if (exception === 'timeout') {
+        return ('Time out error.');
+    } else if (exception === 'abort') {
+        return ('Ajax request aborted.');
+    } else {
+        return ('Uncaught Error.\n' + jqXHR.responseText);
+    }
+}
   static getAllWaypoints() {
     return new Promise((resolve, reject) => {
       $.ajax({
         url: "http://localhost:15989/api/Waypoint",
-        context: document.body
-      }).success(function(waypointList) {
-        resolve(Object.assign([], waypointList));
-      }).fail(function() {
-        reject('Ajax call for getAllWaypoints failed');
+        context: document.body,
+        success: function(waypointList,status,xhr){
+          resolve(Object.assign([], waypointList));
+        }, 
+        error: function(xhr,status,exception){
+          reject('Ajax call for getAllWaypoints failed - ' + WaypointApi.formatErrorMessage(xhr, exception));
+        }
+        
       });
 
     });
@@ -44,22 +66,26 @@ class WaypointApi {
             method: "PUT",
             url: "http://localhost:15989/api/Waypoint",
             data: waypoint,
-            context: document.body
-          }).success(function(waypoint) {
-            resolve(Object.assign([], waypoint));
-          }).fail(function() {
-            reject('Ajax call for getAllWaypoints failed');
+            context: document.body,
+            success: function(changedWaypoint,status,xhr){
+              resolve(Object.assign([], changedWaypoint));
+            }, 
+            error: function(xhr,status,exception){
+              reject('Ajax call for saveWaypoint(update) failed - ' + WaypointApi.formatErrorMessage(xhr, exception));
+            }            
           });
         } else {
           $.ajax({
             method: "POST",
             url: "http://localhost:15989/api/Waypoint",
             data: waypoint,
-            context: document.body
-          }).success(function(waypoint) {
-            resolve(Object.assign([], waypoint));
-          }).fail(function() {
-            reject('Ajax call for getAllWaypoints failed');
+            context: document.body,
+            success: function(createdWaypoint,status,xhr){
+              resolve(Object.assign([], createdWaypoint));
+            }, 
+            error: function(xhr,status,exception){
+              reject('Ajax call for saveWaypoint(create) failed - ' + WaypointApi.formatErrorMessage(xhr, exception));
+            }            
           });
         }
 
@@ -67,16 +93,17 @@ class WaypointApi {
   }
 
   static deleteWaypoint(waypointId) {
-    alert('deleteWaypoint');
     return new Promise((resolve, reject) => {
           $.ajax({
             method: "DELETE",
             url: "http://localhost:15989/api/Waypoint/" + waypointId,
-            context: document.body
-          }).success(function() {
-            resolve();
-          }).fail(function() {
-            reject('Ajax call for getAllWaypoints failed');
+            context: document.body,
+            success: function(){
+              resolve();
+            }, 
+            error: function(xhr,status,exception){
+              reject('Ajax call for deleteWaypoint failed - ' + WaypointApi.formatErrorMessage(xhr, exception));
+            }            
           });
     });
   }
