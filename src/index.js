@@ -7,12 +7,32 @@ import configureStore from './store/configureStore';
 import {Provider} from 'react-redux';
 import {loadTrips} from './actions/tripActions';
 import {loadWaypoints} from './actions/waypointActions';
-import WaypointApi from './api/WaypointApi';
  
 import './styles/styles.css'; //Webpack can import CSS files too!
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/toastr/build/toastr.min.css';
 
+// import TripApi from './api/TripApi';
+
+// TripApi.getAllTrips()
+//     .then(function (tripList) { 
+//         //alert('worked'+ tripList.length);
+//         debugger;
+//         let lastTripId =tripList[tripList.length-1].tripId; 
+//         let w = tripList[0];
+//         w.title=w.title+'a';        
+
+//         TripApi.saveTrip(w).then((wp1) => alert('save worked ' + wp1.tripId)).catch(() => alert('save failed'));
+        
+//         w.tripId = null;
+//         TripApi.saveTrip(w).then((wp2) => alert('create worked ' + wp2.tripId)).catch(() => alert('create failed'));
+        
+//         // TripApi.deleteTrip(lastTripId).then(() => alert('delete worked')).catch((msg) => alert('delete failed: ' + msg));
+//       })
+//     .catch(function (msg ) { 
+//         alert('getAllTrips failed : ' + msg); 
+//     });
+//import WaypointApi from './api/WaypointApi';
 // WaypointApi.getAllWaypoints()
 //     .then(function (waypointList) { 
 //         //alert('worked'+ waypointList.length);

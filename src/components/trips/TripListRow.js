@@ -1,15 +1,38 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
-const TripListRow = ({trip}) => {
-  return (
-    <tr>
-      <td><Link to={'/tripview/' + trip.tripId}>{trip.title}</Link></td>
-      <td>{trip.description}</td>
-      <td><Link to={'/trip/' + trip.tripId}>Edit</Link></td>
-    </tr>
-  );
-};
+class TripListRow extends React.Component {
+    constructor(props, context)    {
+        super(props, context);
+
+        this.onLocalEdit = this.onLocalEdit.bind(this);
+        this.onLocalDelete = this.onLocalDelete.bind(this);
+
+    }
+
+    onLocalEdit()
+    {
+      //this.props.onEdit(this.props.waypoint);
+    }
+
+    onLocalDelete()
+    {
+      console.log('onLocalDelete');
+      this.props.onDeleteTrip(this.props.trip.tripId);
+      //tripActions.deleteTrip(this.props.trip.tripId);
+    }
+
+
+    render() {
+        return (
+          <tr>
+            <td><Link to={'/tripview/' + this.props.trip.tripId}>{this.props.trip.title}</Link></td>
+            <td>{this.props.trip.description}</td>
+            <td><Link to={'/trip/' + this.props.trip.tripId}>Edit</Link> | <a onClick={this.onLocalDelete}>delete</a></td>
+          </tr>
+        );
+    }
+}
 
 TripListRow.propTypes = {
   trip: PropTypes.object.isRequired

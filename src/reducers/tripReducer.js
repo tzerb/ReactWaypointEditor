@@ -2,6 +2,7 @@ import * as types from '../actions/actionTypes';
 import initialState from './initialState';
 
 export default function tripReducer(state = initialState.trips, action) {
+    console.log(action.type);
     switch(action.type) {
 
         case types.LOAD_TRIPS_SUCCESS:
@@ -17,6 +18,17 @@ export default function tripReducer(state = initialState.trips, action) {
         return [
             ...state.filter(trip => trip.tripId !== action.trip.tripId),
             Object.assign({}, action.trip)
+        ];
+
+        case types.DELETE_TRIP_SUCCESS:
+        return [
+            ...state.filter(trip => trip.tripId !== action.tripId)
+        ];
+
+        case types.DELETE_TRIP_WAYPOINT_SUCCESS:
+        let newState = [...state];
+        return [
+            ...state
         ];
 
         default:

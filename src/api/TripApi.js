@@ -1,22 +1,19 @@
 import delay from './delay';
 import $ from 'jquery';
 
-// This file mocks a web API by working with the hard-coded data below.
-// It uses setTimeout to simulate the delay of an AJAX call.
-// All calls return promises.
-const waypoints = [];
+const trips = [];
 
 function replaceAll(str, find, replace) {
   return str.replace(new RegExp(find, 'g'), replace);
 }
 
 //This would be performed on the server in a real app. Just stubbing in.
-const generateId = (waypoint) => {
-  return replaceAll(waypoint.title, ' ', '-');
+const generateId = (trip) => {
+  return replaceAll(trip.title, ' ', '-');
 };
-
-class WaypointApi {
-
+ 
+class TripApi {
+  // TODO TZ consolidate these
   static formatErrorMessage(jqXHR, exception) {
     //http://stackoverflow.com/questions/377644/jquery-ajax-error-handling-show-custom-exception-messages
     if (jqXHR.status === 0) {
@@ -36,16 +33,16 @@ class WaypointApi {
         return ('Uncaught Error.\n' + jqXHR.responseText);
     }
 }
-  static getAllWaypoints() {
+  static getAllTrips() {
     return new Promise((resolve, reject) => {
       $.ajax({
-        url: "http://localhost:15989/api/Waypoint",
+        url: "http://localhost:15989/api/Trip",
         context: document.body,
-        success: function(waypointList,status,xhr){
-          resolve(Object.assign([], waypointList));
+        success: function(tripList,status,xhr){
+          resolve(Object.assign([], tripList));
         }, 
         error: function(xhr,status,exception){
-          reject('Ajax call for getAllWaypoints failed - ' + WaypointApi.formatErrorMessage(xhr, exception));
+          reject('Ajax call for getAllTrips failed - ' + TripApi.formatErrorMessage(xhr, exception));
         }
         
       });
@@ -53,38 +50,38 @@ class WaypointApi {
     });
   }
 
-  static saveWaypoint(waypoint) {
-    waypoint = Object.assign({}, waypoint); // to avoid manipulating object passed in.
+  static saveTrip(trip) {
+    trip = Object.assign({}, trip); // to avoid manipulating object passed in.
     return new Promise((resolve, reject) => {
         // Simulate server-side validation
-        const minWaypointNameLength = 1;
-        if (waypoint.name.length < minWaypointNameLength) {
-          reject(`Name must be at least ${minWaypointTitleLength} characters.`);
+        const minTripTitleLength = 1;
+        if (trip.title.length < minTripTitleLength) {
+          reject(`Title must be at least ${minTripTitleLength} characters.`);
         }
-        if (waypoint.waypointId) {
+        if (trip.tripId) {
           $.ajax({
             method: "PUT",
-            url: "http://localhost:15989/api/Waypoint",
-            data: waypoint,
+            url: "http://localhost:15989/api/Trip",
+            data: trip,
             context: document.body,
-            success: function(changedWaypoint,status,xhr){
-              resolve(Object.assign([], changedWaypoint));
+            success: function(changedTrip,status,xhr){
+              resolve(Object.assign([], changedTrip));
             }, 
             error: function(xhr,status,exception){
-              reject('Ajax call for saveWaypoint(update) failed - ' + WaypointApi.formatErrorMessage(xhr, exception));
+              reject('Ajax call for saveTrip(update) failed - ' + TripApi.formatErrorMessage(xhr, exception));
             }            
           });
         } else {
           $.ajax({
             method: "POST",
-            url: "http://localhost:15989/api/Waypoint",
-            data: waypoint,
+            url: "http://localhost:15989/api/Trip",
+            data: trip,
             context: document.body,
-            success: function(createdWaypoint,status,xhr){
-              resolve(Object.assign([], createdWaypoint));
+            success: function(createdTrip,status,xhr){
+              resolve(Object.assign([], createdTrip));
             }, 
             error: function(xhr,status,exception){
-              reject('Ajax call for saveWaypoint(create) failed - ' + WaypointApi.formatErrorMessage(xhr, exception));
+              reject('Ajax call for saveTrip(create) failed - ' + TripApi.formatErrorMessage(xhr, exception));
             }            
           });
         }
@@ -92,21 +89,21 @@ class WaypointApi {
     });
   }
 
-  static deleteWaypoint(waypointId) {
+  static deleteTrip(tripId) {
     return new Promise((resolve, reject) => {
           $.ajax({
             method: "DELETE",
-            url: "http://localhost:15989/api/Waypoint/" + waypointId,
+            url: "http://localhost:15989/api/Trip/" + tripId,
             context: document.body,
             success: function(){
-              resolve();
+              resolve(tripId);
             }, 
             error: function(xhr,status,exception){
-              reject('Ajax call for deleteWaypoint failed - ' + WaypointApi.formatErrorMessage(xhr, exception));
+              reject('Ajax call for deleteTrip failed - ' + TripApi.formatErrorMessage(xhr, exception));
             }            
           });
     });
   }
 }
 
-export default WaypointApi;
+export default TripApi;

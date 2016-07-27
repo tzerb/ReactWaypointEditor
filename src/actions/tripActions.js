@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import TripApi from '../api/mockTripApi';
+import TripApi from '../api/TripApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 
 export function createTripSuccess(trip)
@@ -20,6 +20,16 @@ export function loadTripSuccess(trips)
 export function saveTripSuccess(trip)
 {
     return {type: types.SAVE_TRIP_SUCCESS, trip};
+}
+
+export function deleteTripSuccess(tripId)
+{
+    return {type: types.DELETE_TRIP_SUCCESS, tripId};
+}
+
+export function deleteTripWaypointSuccess(trip, waypoint)
+{
+    return {type: types.DELETE_TRIP_SUCCESS, trip, waypoint};
 }
 
 export function loadTrips() {
@@ -49,4 +59,21 @@ export function saveTrip(trip) {
       throw(error);
     });
   };
+ 
 }
+
+
+export function deleteTrip(tripId) {
+    console.log('here');
+  return function (dispatch, getState) {
+    dispatch(beginAjaxCall());
+    return TripApi.deleteTrip(tripId).then(trip => {
+        console.log('then');
+        dispatch(deleteTripSuccess(tripId));
+    }).catch(error => {
+      console.log('error');
+      dispatch(ajaxCallError(error));
+      throw(error);
+    });
+  };
+} 

@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import TripListRow from './TripListRow';
 
-const TripList = ({trips}) => {
+const TripList = ({trips, onDeleteTrip}) => {
   return (
     <table className="table">
       <thead>
@@ -13,7 +13,7 @@ const TripList = ({trips}) => {
       </thead>
       <tbody>
       {trips.map(trip =>
-        <TripListRow key={trip.tripId} trip={trip}/>
+        <TripListRow key={trip.tripId} trip={trip} onDeleteTrip={onDeleteTrip}/>
       )}
       </tbody>
     </table>
@@ -21,7 +21,8 @@ const TripList = ({trips}) => {
 };
 
 TripList.propTypes = {
-  trips: PropTypes.array.isRequired
+  trips: PropTypes.array.isRequired,
+  onDeleteTrip : PropTypes.func.isRequired
 };
 
 export default TripList;

@@ -8,13 +8,19 @@ import TripEditor from './TripEditor';
 class TripPage extends React.Component {
     constructor(props, context)    {
         super(props, context);
+        this.deleteTrip = this.deleteTrip.bind(this);
+    }
+
+    deleteTrip(tripId)
+    {
+        this.props.actions.deleteTrip(tripId);
     }
 
     render() {
         return (
-            <div>
+            <div><button onClick={this.deleteTrip}>Delete</button>
                 <h1>Trips</h1>
-                <TripList trips={this.props.trips}/>
+                <TripList trips={this.props.trips} onDeleteTrip={this.deleteTrip}/>
             </div>
         );
     }
