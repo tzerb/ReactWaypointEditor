@@ -7,23 +7,38 @@ class Map3 extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    debugger;
     this.state = {
       waypoints: Object.assign({}, this.props.waypoints)
     };
+
+    this.renderMap = this.renderMap.bind(this);
     
   }
+  
+	componentDidMount() {
+    toastr.success('componentDidMount - ' + this._mapElement);
+    let myLatlng = new google.maps.LatLng(44.012077, -89.40526);
+    let options = {
+        zoom: 11,
+        center: myLatlng,
+        mapTypeId: google.maps.MapTypeId.TERRAIN
+    }            
+    new google.maps.Map(document.getElementById("map_canvas"), options);    
+    //this._input.focus();
+  }
 
-    componentWillReceiveProps(nextProps) {
-        toastr.warning('componentWillReceiveProps');
-        //alert('componentWillReceiveProps');
-    }
+  renderMap(el)
+  {
+
+  }
+
   render() {
     // TODO TZ - remove debugging code.
-    toastr.warning('render');
-        
+    toastr.warning('Map3.render');
+    //debugger;        
     return (
-        <div id="map_canvas3">Map goes here</div>
+        <div id="map_canvas3" ref={(c) => this._mapElement = c}>
+        </div>
     );
   }
 }

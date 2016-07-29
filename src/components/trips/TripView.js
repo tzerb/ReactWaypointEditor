@@ -26,6 +26,9 @@ export class TripView extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // TODO TZ - remove debugging code.
+    toastr.success('TripView.componentWillReceiveProps');
+    
     if (this.props.trip.tripId != nextProps.trip.tripId) {
       // Necessary to populate form when existing trip is loaded directly.
       this.setState({trip: Object.assign({}, nextProps.trip)});
@@ -70,8 +73,10 @@ export class TripView extends React.Component {
                 <WaypointList waypoints={this.props.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
             </div>          
           </div>
-          <div className="col-md-3 well">
-            <Map3 waypoints={this.props.trip.waypoints}/>
+          <div className="row">
+            <div className="col-md-12 well">
+              <Map3 waypoints={this.props.trip.waypoints}/>
+            </div>
           </div>
         </div>
       );
