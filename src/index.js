@@ -32,7 +32,7 @@ import '../node_modules/toastr/build/toastr.min.css';
 //     .catch(function (msg ) { 
 //         alert('getAllTrips failed : ' + msg); 
 //     });
-//import WaypointApi from './api/WaypointApi';
+// import WaypointApi from './api/WaypointApi';
 // WaypointApi.getAllWaypoints()
 //     .then(function (waypointList) { 
 //         //alert('worked'+ waypointList.length);
@@ -45,7 +45,7 @@ import '../node_modules/toastr/build/toastr.min.css';
 //         w.waypointId = null;
 //         WaypointApi.saveWaypoint(w).then((wp2) => alert('create worked ' + wp2.waypointId)).catch(() => alert('create failed'));
         
-//         WaypointApi.deleteWaypoint(lastWaypointId).then(() => alert('delete worked')).catch((msg) => alert('delete failed: ' + msg));
+//         //WaypointApi.deleteWaypoint(lastWaypointId).then(() => alert('delete worked')).catch((msg) => alert('delete failed: ' + msg));
 //       })
 //     .catch(function (msg ) { 
 //         alert('getAllWaypoints failed : ' + msg); 

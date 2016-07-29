@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-const LocationInput = ({name, label, onChange, placeholder, value, error}) => {
+const LocationInput = ({name, label, onChange, placeholder, latitude, longitude, error}) => {
   let wrapperClass = 'form-group';
   if (error && error.length > 0) {
     wrapperClass += " " + 'has-error';
@@ -8,7 +8,7 @@ const LocationInput = ({name, label, onChange, placeholder, value, error}) => {
 
   return (
     <div className={wrapperClass}>
-      <div>{label}</div>
+      {false && <div>{label}</div>}
       <label htmlFor={name}>Latitude</label>
       <div className="field">
         <input
@@ -16,7 +16,7 @@ const LocationInput = ({name, label, onChange, placeholder, value, error}) => {
           name={name}
           className="form-control"
           placeholder={placeholder}
-          value={value}
+          value={latitude}
           onChange={onChange}/>
       </div>
       <label htmlFor={name}>Longitude</label>
@@ -26,7 +26,7 @@ const LocationInput = ({name, label, onChange, placeholder, value, error}) => {
           name={name}
           className="form-control"
           placeholder={placeholder}
-          value={value}
+          value={longitude}
           onChange={onChange}/>          
         {error && <div className="alert alert-danger">{error}</div>}
       </div>
@@ -39,7 +39,8 @@ LocationInput.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
-  value: PropTypes.string,
+  latitude: PropTypes.number,
+  longitude: PropTypes.number,
   error: PropTypes.string
 };
 

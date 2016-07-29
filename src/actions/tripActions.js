@@ -17,14 +17,9 @@ export function loadTripSuccess(trips)
     return {type: types.LOAD_TRIPS_SUCCESS, trips};
 }
 
-export function saveTripSuccess(trip)
+export function deleteTripSuccess(trip)
 {
-    return {type: types.SAVE_TRIP_SUCCESS, trip};
-}
-
-export function deleteTripSuccess(tripId)
-{
-    return {type: types.DELETE_TRIP_SUCCESS, tripId};
+    return {type: types.DELETE_TRIP_SUCCESS, trip};
 }
 
 export function deleteTripWaypointSuccess(trip, waypoint)
@@ -63,11 +58,11 @@ export function saveTrip(trip) {
 }
 
 
-export function deleteTrip(tripId) {
+export function deleteTrip(trip) {
   return function (dispatch, getState) {
     dispatch(beginAjaxCall());
-    return TripApi.deleteTrip(tripId).then(trip => {
-        dispatch(deleteTripSuccess(tripId));
+    return TripApi.deleteTrip(trip.tripId).then(t => {
+        dispatch(deleteTripSuccess(trip));
     }).catch(error => {
       dispatch(ajaxCallError(error));
       throw(error);

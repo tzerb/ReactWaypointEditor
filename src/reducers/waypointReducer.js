@@ -5,7 +5,6 @@ export default function waypointReducer(state = initialState.waypoints, action) 
     switch(action.type) {
 
         case types.LOAD_WAYPOINTS_SUCCESS:
-            //alert('LOAD_WAYPOINTS_SUCCESS');
             return action.waypoints;
 
         case types.CREATE_WAYPOINT_SUCCESS:

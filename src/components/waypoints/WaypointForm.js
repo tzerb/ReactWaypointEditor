@@ -6,7 +6,7 @@ import LocationInput from '../common/LocationInput';
 
 const WaypointForm = ({waypoint, onSave, onChange, saving, errors}) => {
   try {
-
+ 
     return (
       <form>
         <h1>Manage waypoint</h1>

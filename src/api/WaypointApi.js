@@ -8,13 +8,13 @@ class WaypointApi {
   static getAllWaypoints() {
     return new Promise((resolve, reject) => {
       $.ajax({
-        url: `{$ApiConfig.ApiServer}/api/Waypoint`,
+        url: ApiConfig.ApiServer + "/api/Waypoint",
         context: document.body,
         success: function(waypointList,status,xhr){
           resolve(Object.assign([], waypointList));
         }, 
         error: function(xhr,status,exception){
-          reject('Ajax call for getAllWaypoints failed - ' + WaypointApi.formatErrorMessage(xhr, exception));
+          reject('Ajax call for getAllWaypoints failed - ' + ApiHelpers.formatErrorMessage(xhr, exception));
         }
         
       });
@@ -33,27 +33,27 @@ class WaypointApi {
         if (waypoint.waypointId) {
           $.ajax({
             method: "PUT",
-            url: `{$ApiConfig.ApiServer}/api/Waypoint`,
+            url: ApiConfig.ApiServer + "/api/Waypoint",
             data: waypoint,
             context: document.body,
             success: function(changedWaypoint,status,xhr){
               resolve(Object.assign([], changedWaypoint));
             }, 
             error: function(xhr,status,exception){
-              reject('Ajax call for saveWaypoint(update) failed - ' + WaypointApi.formatErrorMessage(xhr, exception));
+              reject('Ajax call for saveWaypoint(update) failed - ' + ApiHelpers.formatErrorMessage(xhr, exception));
             }            
           });
         } else {
           $.ajax({
             method: "POST",
-            url: `{$ApiConfig.ApiServer}/api/Waypoint`,
+            url: ApiConfig.ApiServer + "/api/Waypoint",
             data: waypoint,
             context: document.body,
             success: function(createdWaypoint,status,xhr){
               resolve(Object.assign([], createdWaypoint));
             }, 
             error: function(xhr,status,exception){
-              reject('Ajax call for saveWaypoint(create) failed - ' + WaypointApi.formatErrorMessage(xhr, exception));
+              reject('Ajax call for saveWaypoint(create) failed - ' + ApiHelpers.formatErrorMessage(xhr, exception));
             }            
           });
         }
@@ -61,17 +61,17 @@ class WaypointApi {
     });
   }
 
-  static deleteWaypoint(waypointId) {
+  static deleteWaypoint(waypoint) {
     return new Promise((resolve, reject) => {
           $.ajax({
             method: "DELETE",
-            url: `{$ApiConfig.ApiServer}/api/Waypoint/` + waypointId,
+            url: ApiConfig.ApiServer + "/api/Waypoint/" + waypoint.waypointId,
             context: document.body,
             success: function(){
-              resolve();
+              resolve(waypoint);
             }, 
             error: function(xhr,status,exception){
-              reject('Ajax call for deleteWaypoint failed - ' + WaypointApi.formatErrorMessage(xhr, exception));
+              reject('Ajax call for deleteWaypoint failed - ' + ApiHelpers.formatErrorMessage(xhr, exception));
             }            
           });
     });

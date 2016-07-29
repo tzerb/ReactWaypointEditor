@@ -1,9 +1,12 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as waypointActions from '../../actions/waypointActions';
-import waypointForm from './WaypointForm';
+
 import toastr from 'toastr';
+import moment from 'moment';
+
+import * as waypointActions from '../../actions/waypointActions';
+import WaypointForm from './WaypointForm';
 
 export class ManageWaypointPage extends React.Component {
   constructor(props, context) {
@@ -37,8 +40,15 @@ export class ManageWaypointPage extends React.Component {
     let formIsValid = true;
     let errors = {};
 
-    if (this.state.waypoint.title.length < 5) {
-      errors.title = 'Title must be at least 5 characters.';
+    if (this.state.waypoint.name.length < 2) {
+      errors.name = 'Name must be at least 2 characters.';
+      formIsValid = false;
+    }
+
+    if (!(moment(this.state.waypoint.dateTime).isValid()))
+    {
+      // TODO TZ do we need better name than 'DateTime'  (TripDate?)?!?
+      errors.dateTime = 'DateTime is not valid.';
       formIsValid = false;
     }
 
@@ -53,7 +63,7 @@ export class ManageWaypointPage extends React.Component {
     }
 
     this.setState({saving: true});
-    this.props.actions.savewaypoint(this.state.waypoint)
+    this.props.actions.saveWaypoint(this.state.waypoint)
       .then(() => { 
         this.redirect();
       })
@@ -66,18 +76,20 @@ export class ManageWaypointPage extends React.Component {
   redirect() {
     this.setState({saving: false});
     toastr.success('waypoint saved.');
-    this.context.router.push('/waypoints');
+    this.context.router.push('/tripview/1');
   }
 
   render() {
     return (
-      <waypointForm
+      <div>ManageWaypointPage
+      <WaypointForm
         waypoint={this.state.waypoint}
         onChange={this.updatewaypointState}
         onSave={this.savewaypoint}
         errors={this.state.errors}
         saving={this.state.saving}
       />
+      </div>
     );
   }
 }
@@ -101,8 +113,19 @@ function getwaypointById(waypoints, waypointId) {
 function mapStateToProps(state, ownProps) {
   const waypointId = ownProps.params.id; // from the path `/waypoint/:id`
 
-  let waypoint = {id: '', title: '' };
-
+  let waypoint = {
+      tripId: 1, 
+      latitude: 43.905967197,
+      longitude: -88.428131393,
+      waypointId: null,
+      waypointFileId: 1,
+      dateTime: "2016-07-07T18:49:39",
+      description: "WP004x",
+      name: "WP004x",
+      depth: 0,
+      type: 0,
+      visible: false
+    };
   if (waypointId && state.waypoints.length > 0) {
     waypoint = getwaypointById(state.waypoints, waypointId);
   }

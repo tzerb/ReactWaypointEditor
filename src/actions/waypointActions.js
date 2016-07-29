@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import WaypointApi from '../api/mockWaypointApi';
+import WaypointApi from '../api/WaypointApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 
 export function createWaypointSuccess(waypoint)
@@ -17,10 +17,10 @@ export function loadWaypointSuccess(waypoints)
     return {type: types.LOAD_WAYPOINTS_SUCCESS, waypoints};
 }
 
-export function saveWaypointSuccess(waypoint)
-{
-    return {type: types.SAVE_WAYPOINT_SUCCESS, waypoint};
-}
+// export function saveWaypointSuccess(waypoint)
+// {
+//     return {type: types.SAVE_WAYPOINT_SUCCESS, waypoint};
+// }
 
 export function deleteWaypointSuccess(waypoint)
 {

@@ -32,8 +32,8 @@ class WaypointListRow extends React.Component {
 
 WaypointListRow.propTypes = {
   waypoint: PropTypes.object.isRequired,
-  onEdit : PropTypes.function,
-  onDelete : PropTypes.function
+  onEdit : PropTypes.func.isRequired,
+  onDelete : PropTypes.func.isRequired
 };
 
 export default WaypointListRow;

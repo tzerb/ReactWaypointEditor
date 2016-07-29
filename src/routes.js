@@ -23,6 +23,7 @@ export default (
     <Route path="trip" component={ManageTripPage}/>
     <Route path="tripview/:id" component={TripView}/>
 
+    <Route path="waypoint" component={ManageWaypointPage}/>
     <Route path="waypoint/:id" component={ManageWaypointPage}/>
 
     <Route path="track/:id" component={ManageTrackPage}/>

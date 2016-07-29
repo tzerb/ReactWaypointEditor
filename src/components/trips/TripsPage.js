@@ -15,9 +15,9 @@ class TripPage extends React.Component {
         this.deleteTrip = this.deleteTrip.bind(this);
     }
 
-    deleteTrip(tripId)
+    deleteTrip(trip)
     {
-        this.props.actions.deleteTrip(tripId)
+        this.props.actions.deleteTrip(trip)
             .then(() => { 
                 toastr.success('trip deleted');
             })

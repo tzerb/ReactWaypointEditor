@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -38,21 +39,35 @@ export class TripView extends React.Component {
   
   onDeleteWaypoint(waypoint)
   {
-    //alert('delete-' + waypoint.waypointId);
-    this.props.waypointActions.deleteWaypoint(waypoint);
+    // TODO TZ - remove debugging code.
+    toastr.success('waypoint delete START (# waypoints on this trip=' + this.props.trip.waypoints.length);
+    
+    this.props.waypointActions.deleteWaypoint(waypoint)
+    	.then(() => { 
+                // TODO TZ - remove debugging code.
+                toastr.success('waypoint deleted (# waypoints on this trip=' + this.props.trip.waypoints.length);
+            })
+            .catch(error => {
+                toastr.error(error);
+                //this.setState({saving: false});
+            });
   }
 
   render() {
+    // TODO TZ - remove debugging code.
+	  toastr.warning('render');
+    
     try {
       return (   
         <div className=""> 
           <div className="row">
-            <TripHeader trip={this.state.trip}/>
+            <TripHeader trip={this.props.trip}/>
             <div className="col-md-3 well">
-              <WaypointList waypoints={this.state.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
+              <WaypointList waypoints={this.props.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
+              <Link to={'/waypoint'}>Add Waypoint</Link>
             </div>
             <div className="col-md-3 well">
-                <WaypointList waypoints={this.state.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
+                <WaypointList waypoints={this.props.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
             </div>          
           </div>
         </div>
@@ -84,9 +99,9 @@ function getTripById(trips, tripId) {
 }
 
 function mapStateToProps(state, ownProps) {
-  // alert('mapStateToProps');
   const tripId = ownProps.params.id; // from the path `/trip/:id`
 
+  // TODO TZ - Clear these up, have a new Trip() or something like that.
   let trip = {id: '', title: '' };
 
   if (tripId && state.trips.length > 0) {
@@ -99,7 +114,6 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-  // alert('mapDispatchToProps');
   return {
     actions: bindActionCreators(tripActions, dispatch),
     waypointActions: bindActionCreators(waypointActions, dispatch)

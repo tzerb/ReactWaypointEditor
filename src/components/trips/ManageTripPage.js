@@ -31,6 +31,9 @@ export class ManageTripPage extends React.Component {
   }
 
   updateTripState(event) {
+    // TODO TZ - remove debugging code.
+    toastr.success('updateTripState');
+    
     const field = event.target.name;
     let trip = this.state.trip;
     trip[field] = event.target.value;
@@ -80,6 +83,9 @@ export class ManageTripPage extends React.Component {
   }
 
   render() {
+    // TODO TZ - remove debugging code.
+	  toastr.warning('render');
+        
     return (
       <TripForm
         trip={this.state.trip}

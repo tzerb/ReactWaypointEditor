@@ -17,7 +17,7 @@ class TripListRow extends React.Component {
 
     onLocalDelete()
     {
-      this.props.onDeleteTrip(this.props.trip.tripId);
+      this.props.onDeleteTrip(this.props.trip);
     }
 
 
@@ -26,7 +26,7 @@ class TripListRow extends React.Component {
           <tr>
             <td><Link to={'/tripview/' + this.props.trip.tripId}>{this.props.trip.title}</Link></td>
             <td>{this.props.trip.description}</td>
-            <td><Link to={'/trip/' + this.props.trip.tripId}>Edit</Link> | <a onClick={this.onLocalDelete}>delete</a></td>
+            <td><Link to={'/trip/' + this.props.trip.tripId}>edit</Link> | <a onClick={this.onLocalDelete}>delete</a></td>
           </tr>
         );
     }
