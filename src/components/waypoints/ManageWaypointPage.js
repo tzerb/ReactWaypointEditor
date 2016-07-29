@@ -30,6 +30,8 @@ export class ManageWaypointPage extends React.Component {
   }
 
   updatewaypointState(event) {
+    toastr.warning('updatewaypointState-' + event.target.name + ',' + event.target.value);
+
     const field = event.target.name;
     let waypoint = this.state.waypoint;
     waypoint[field] = event.target.value;
