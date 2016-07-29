@@ -43,7 +43,7 @@ export class TripView extends React.Component {
     toastr.success('waypoint delete START (# waypoints on this trip=' + this.props.trip.waypoints.length);
     
     this.props.waypointActions.deleteWaypoint(waypoint)
-    	.then(() => { 
+      .then(() => { 
                 // TODO TZ - remove debugging code.
                 toastr.success('waypoint deleted (# waypoints on this trip=' + this.props.trip.waypoints.length);
             })
@@ -55,7 +55,7 @@ export class TripView extends React.Component {
 
   render() {
     // TODO TZ - remove debugging code.
-	  toastr.warning('render');
+    toastr.warning('render');
     
     try {
       return (   

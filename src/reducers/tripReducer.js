@@ -43,6 +43,8 @@ export default function tripReducer(state = initialState.trips, action) {
             ]; 
             return [...newState];
         }
+        else
+            return [...state];
         
         case types.UPDATE_WAYPOINT_SUCCESS:
         if (action.waypoint.tripId && action.waypoint.tripId!=0)

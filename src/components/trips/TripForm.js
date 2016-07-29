@@ -43,7 +43,6 @@ const TripForm = ({trip, onSave, onChange, saving, errors}) => {
     );
   } catch (ex)
   {
-    console.log(ex);
     return (<div>Error rendering TripForm</div>); 
   }
 

@@ -5,7 +5,7 @@ import * as tripActions from '../../actions/tripActions';
 import TripForm from './TripForm';
 import toastr from 'toastr';
 
-export class TripEditor extends React.Component {
+class TripEditor extends React.Component {
   constructor(props, context) {
     super(props, context);
 

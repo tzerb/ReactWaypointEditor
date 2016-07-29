@@ -84,7 +84,7 @@ export class ManageTripPage extends React.Component {
 
   render() {
     // TODO TZ - remove debugging code.
-	  toastr.warning('render');
+    toastr.warning('render');
         
     return (
       <TripForm
