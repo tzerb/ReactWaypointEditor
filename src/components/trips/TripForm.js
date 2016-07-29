@@ -3,13 +3,14 @@ import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 import TextInputBig from '../common/TextInputBig';
 import DateTime from '../common/DateTime';
+import DateInput from '../common/DateInput';
 
 const TripForm = ({trip, onSave, onChange, saving, errors}) => {
   try {
 
     return (
       <form>
-        <h1>Manage Trip {trip.waypoints.length} </h1>
+        <h1>Manage Trip </h1>
         <TextInput
           name="title"
           label="Title"
@@ -42,6 +43,7 @@ const TripForm = ({trip, onSave, onChange, saving, errors}) => {
     );
   } catch (ex)
   {
+    console.log(ex);
     return (<div>Error rendering TripForm</div>); 
   }
 

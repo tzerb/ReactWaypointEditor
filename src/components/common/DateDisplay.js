@@ -1,21 +1,22 @@
 import React, {PropTypes} from 'react';
 import moment from 'moment';
 
-const DateTimeDisplay = ({name, label, value}) => {
+const DateDisplay = ({name, label, value}) => {
   let wrapperClass = '';
-  let date = moment(value).format();
+
+  let date = moment(value).format('MM/DD/YYYY');
   return (
     <span className={wrapperClass}>
         <span>{label} : </span>
-        <span>{value}</span>
+        <span>{date}</span>
     </span>
   );
 };
 
-DateTimeDisplay.propTypes = {
+DateDisplay.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   value: PropTypes.string
 };
 
-export default DateTimeDisplay;
+export default DateDisplay;

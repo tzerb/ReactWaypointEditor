@@ -1,9 +1,13 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+
+import toastr from 'toastr';
+import moment from 'moment';
+
 import * as tripActions from '../../actions/tripActions';
 import TripForm from './TripForm';
-import toastr from 'toastr';
+
 
 export class ManageTripPage extends React.Component {
   constructor(props, context) {
@@ -42,6 +46,12 @@ export class ManageTripPage extends React.Component {
       formIsValid = false;
     }
 
+    if (!(moment(this.state.trip.dateTime, 'MM/DD/YYYY', true).isValid()))
+    {
+      // TODO TZ do we need better name than 'DateTime'  (TripDate?)?!?
+      errors.dateTime = 'DateTime is not valid.';
+      formIsValid = false;
+    }
     this.setState({errors: errors});
     return formIsValid;
   }

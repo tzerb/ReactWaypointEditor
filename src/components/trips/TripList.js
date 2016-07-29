@@ -19,7 +19,7 @@ const TripList = ({trips, onDeleteTrip}) => {
     </table>
   );
 };
-
+//
 TripList.propTypes = {
   trips: PropTypes.array.isRequired,
   onDeleteTrip : PropTypes.func.isRequired

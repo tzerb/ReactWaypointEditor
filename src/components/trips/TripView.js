@@ -84,7 +84,7 @@ function getTripById(trips, tripId) {
 }
 
 function mapStateToProps(state, ownProps) {
-  alert('mapStateToProps');
+  // alert('mapStateToProps');
   const tripId = ownProps.params.id; // from the path `/trip/:id`
 
   let trip = {id: '', title: '' };
@@ -99,7 +99,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-  alert('mapDispatchToProps');
+  // alert('mapDispatchToProps');
   return {
     actions: bindActionCreators(tripActions, dispatch),
     waypointActions: bindActionCreators(waypointActions, dispatch)

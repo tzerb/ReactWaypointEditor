@@ -64,14 +64,11 @@ export function saveTrip(trip) {
 
 
 export function deleteTrip(tripId) {
-    console.log('here');
   return function (dispatch, getState) {
     dispatch(beginAjaxCall());
     return TripApi.deleteTrip(tripId).then(trip => {
-        console.log('then');
         dispatch(deleteTripSuccess(tripId));
     }).catch(error => {
-      console.log('error');
       dispatch(ajaxCallError(error));
       throw(error);
     });

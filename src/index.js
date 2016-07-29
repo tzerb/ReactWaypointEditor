@@ -54,8 +54,17 @@ import '../node_modules/toastr/build/toastr.min.css';
 const store = configureStore();
 
 // Dispatch actions to load initial state.
-store.dispatch(loadTrips());
-store.dispatch(loadWaypoints());
+try {
+  let trips = loadTrips();
+  // TODO TZ - Use the server to load initial state?
+  store.dispatch(loadTrips());
+  store.dispatch(loadWaypoints());
+}
+catch(ex)
+{
+  // TODO TZ - Should handle this better.
+  alert("issue loading initial data (is the server running)");
+}
 
 render(
   <Provider store={store}>

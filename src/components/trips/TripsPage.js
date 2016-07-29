@@ -1,6 +1,10 @@
 import React, {PropTypes} from 'react';
+import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+
+import toastr from 'toastr';
+
 import * as tripActions from '../../actions/tripActions';
 import TripList from './TripList';
 import TripEditor from './TripEditor';
@@ -13,14 +17,22 @@ class TripPage extends React.Component {
 
     deleteTrip(tripId)
     {
-        this.props.actions.deleteTrip(tripId);
+        this.props.actions.deleteTrip(tripId)
+            .then(() => { 
+                toastr.success('trip deleted');
+            })
+            .catch(error => {
+                toastr.error(error);
+                //this.setState({saving: false});
+            });
     }
 
     render() {
         return (
-            <div><button onClick={this.deleteTrip}>Delete</button>
+            <div>
                 <h1>Trips</h1>
                 <TripList trips={this.props.trips} onDeleteTrip={this.deleteTrip}/>
+                <Link to={'/trip'}>Add Trip</Link>
             </div>
         );
     }

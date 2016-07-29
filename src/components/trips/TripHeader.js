@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import TextDisplay from '../common/TextDisplay';
 import TextDisplayBig from '../common/TextDisplayBig';
-import DateTimeDisplay from '../common/DateTimeDisplay';
+import DateDisplay from '../common/DateDisplay';
 
 const TripHeader = ({trip}) => {
   try {
@@ -22,7 +22,7 @@ const TripHeader = ({trip}) => {
           value={trip.description}
           />        
           <br/>      
-          <DateTimeDisplay
+        <DateDisplay
           name="dateTime"
           label="Date/Time"
           value={trip.dateTime}

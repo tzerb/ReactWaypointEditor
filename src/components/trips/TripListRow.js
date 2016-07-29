@@ -17,9 +17,7 @@ class TripListRow extends React.Component {
 
     onLocalDelete()
     {
-      console.log('onLocalDelete');
       this.props.onDeleteTrip(this.props.trip.tripId);
-      //tripActions.deleteTrip(this.props.trip.tripId);
     }
 
 
@@ -35,7 +33,8 @@ class TripListRow extends React.Component {
 }
 
 TripListRow.propTypes = {
-  trip: PropTypes.object.isRequired
+  trip: PropTypes.object.isRequired,
+  onDeleteTrip: PropTypes.func.isRequired
 };
 
 export default TripListRow;
