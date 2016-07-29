@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import toastr from 'toastr';
-
+import Map3 from  '../common/Map3';
 import * as tripActions from '../../actions/tripActions';
 import * as waypointActions from '../../actions/waypointActions';
 
@@ -55,7 +55,7 @@ export class TripView extends React.Component {
 
   render() {
     // TODO TZ - remove debugging code.
-    toastr.warning('render');
+    //toastr.warning('render');
     
     try {
       return (   
@@ -69,6 +69,9 @@ export class TripView extends React.Component {
             <div className="col-md-3 well">
                 <WaypointList waypoints={this.props.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
             </div>          
+          </div>
+          <div className="col-md-3 well">
+            <Map3 waypoints={this.props.trip.waypoints}/>
           </div>
         </div>
       );
