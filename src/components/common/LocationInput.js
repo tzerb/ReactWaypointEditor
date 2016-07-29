@@ -18,6 +18,13 @@ const LocationInput = ({name, label, onChange, placeholder, latitude, longitude,
           placeholder={placeholder}
           value={latitude}
           onChange={onChange}/>
+        <input
+          type="text"
+          name={name}
+          className="form-control"
+          value={latitude}
+          placeholder={placeholder}
+          />          
       </div>
       <label htmlFor={name}>Longitude</label>
       <div className="field">

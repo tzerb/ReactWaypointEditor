@@ -1,0 +1,6 @@
+
+C:\repos\ReactWaypointEditor>git diff --name-status master..AddMaps_react_google_maps
+
+C:\repos\ReactWaypointEditor>git diff --stat --color  master..AddMaps_react_google_maps
+
+C:\repos\ReactWaypointEditor>git diff   master..AddMaps_react_google_maps > a.out

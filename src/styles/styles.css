@@ -25,3 +25,10 @@ nav {
   display: inline-block;
   margin: 0.5em;    
 }
+
+.my_image_class {
+  height: 100;
+  width: 100;
+  border:2;
+  background: url('../Images/marker.png')
+}

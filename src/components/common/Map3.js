@@ -14,8 +14,8 @@ class Map3 extends React.Component {
     this.renderMap = this.renderMap.bind(this);
     
   }
-  
-	componentDidMount() {
+
+  componentDidUpdate(prevProps,  prevState) {
     toastr.success('componentDidMount - ' + this._mapElement);
     let myLatlng = new google.maps.LatLng(44.012077, -89.40526);
     let options = {
@@ -23,13 +23,26 @@ class Map3 extends React.Component {
         center: myLatlng,
         mapTypeId: google.maps.MapTypeId.TERRAIN
     }            
-    new google.maps.Map(document.getElementById("map_canvas"), options);    
+    this._map = new google.maps.Map(document.getElementById("map_canvas"), options);
+    if (this.props.waypoints)
+    {
+      this.props.waypoints.map((wp) => 
+      {
+        toastr.success(wp.name)
+        let marker = new google.maps.Marker({
+            position: new google.maps.LatLng(44.012077, -89.40526),
+            map: this._map,
+            title: wp.name
+        });
+        
+      });
+    }    
+
     //this._input.focus();
   }
 
   renderMap(el)
   {
-
   }
 
   render() {
@@ -38,6 +51,7 @@ class Map3 extends React.Component {
     //debugger;        
     return (
         <div id="map_canvas3" ref={(c) => this._mapElement = c}>
+        {this.props.waypoints.length}
         </div>
     );
   }
