@@ -13,7 +13,7 @@ const LocationInput = ({name, label, onChange, placeholder, latitude, longitude,
       <div className="field">
         <input
           type="text"
-          name={name}
+          name="latitude"
           className="form-control"
           placeholder={placeholder}
           value={latitude}
@@ -30,7 +30,7 @@ const LocationInput = ({name, label, onChange, placeholder, latitude, longitude,
       <div className="field">
         <input
           type="text"
-          name={name}
+          name="longitude"
           className="form-control"
           placeholder={placeholder}
           value={longitude}
@@ -46,8 +46,8 @@ LocationInput.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
-  latitude: PropTypes.number,
-  longitude: PropTypes.number,
+  // latitude: PropTypes.number,
+  // longitude: PropTypes.number,
   error: PropTypes.string
 };
 
