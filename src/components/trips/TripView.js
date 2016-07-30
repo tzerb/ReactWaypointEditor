@@ -7,6 +7,7 @@ import toastr from 'toastr';
 
 import * as tripActions from '../../actions/tripActions';
 import * as waypointActions from '../../actions/waypointActions';
+import * as pictureActions from '../../actions/pictureActions';
 
 import TripHeader from './TripHeader';
 
@@ -24,6 +25,9 @@ export class TripView extends React.Component {
     };
     this.onEditWaypoint = this.onEditWaypoint.bind(this);
     this.onDeleteWaypoint = this.onDeleteWaypoint.bind(this);
+
+    this.onEditPicture = this.onEditPicture.bind(this);
+    this.onDeletePicture = this.onDeletePicture.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -35,17 +39,28 @@ export class TripView extends React.Component {
 
   onEditPicture(picture)
   {
-    alert('edit-' + picture.pictureId);
+    alert('edit picture-' + picture.pictureId);
   }
   
   onDeletePicture(picture)
   {
-    alert('delete-' + picture.pictureId);
+    // alert('delete picture-' + picture.pictureId);
+    toastr.success('picture delete START (# pictures on this trip=' + this.props.trip.pictures.length);
+    
+    this.props.pictureActions.deletePicture(picture)
+      .then(() => { 
+                // TODO TZ - remove debugging code.
+                toastr.success('picture deleted (# pictures on this trip=' + this.props.trip.pictures.length);
+            })
+            .catch(error => {
+                toastr.error(error);
+                //this.setState({saving: false});
+            });    
   }
 
   onEditWaypoint(waypoint)
   {
-    alert('edit-' + waypoint.waypointId);
+    alert('edit waypoint-' + waypoint.waypointId);
   }
   
   onDeleteWaypoint(waypoint)
@@ -127,7 +142,8 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(tripActions, dispatch),
-    waypointActions: bindActionCreators(waypointActions, dispatch)
+    waypointActions: bindActionCreators(waypointActions, dispatch),
+    pictureActions: bindActionCreators(pictureActions, dispatch)
   };
 }
 

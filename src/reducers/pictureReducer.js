@@ -7,5 +7,22 @@ export default function tripReducer(state = initialState.pictures, action) {
             return [...action.pictures];
 	    default:    
 	        return state;
+
+        case types.CREATE_PICTURE_SUCCESS:
+        return [
+            ...state,
+            Object.assign({}, action.picture)
+        ];
+
+        case types.UPDATE_PICTURE_SUCCESS:
+        return [
+            ...state.filter(picture => picture.pictureId !== action.picture.pictureId),
+            Object.assign({}, action.picture)
+        ];
+
+        case types.DELETE_PICTURE_SUCCESS:
+        return [
+            ...state.filter(picture => picture.pictureId !== action.picture.pictureId)
+        ];            
     }
 }

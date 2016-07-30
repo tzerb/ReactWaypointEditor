@@ -24,7 +24,7 @@ class PictureListRow extends React.Component {
         return (
           <tr>
             <td><Link to={'/picture/'+this.props.picture.pictureId}>edit</Link> <a onClick = {this.onLocalEdit}>edit</a> <a onClick = {this.onLocalDelete}>delete</a></td>
-            <td>{this.props.picture.description}</td>
+            <td>{this.props.picture.description}<img width="100" src={"http://localhost:15989//Pictures/Image?pictureId="+this.props.picture.pictureId}/></td>
           </tr>
         );
     }

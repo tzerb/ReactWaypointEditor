@@ -79,7 +79,7 @@ export class ManagePicturePage extends React.Component {
   redirect() {
     this.setState({saving: false});
     toastr.success('Picture saved.');
-    this.context.router.push('/pictures');
+    this.context.router.push('/tripview/1');
   }
 
   render() {

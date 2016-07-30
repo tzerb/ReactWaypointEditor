@@ -32,7 +32,6 @@ const PictureForm = ({picture, onSave, onChange, saving, errors}) => {
           onChange={onChange}
           error={errors.dateTime}/>
           
-        // TODO TZ Add lat/long here?
         <input
           type="submit"
           disabled={saving}
@@ -41,7 +40,8 @@ const PictureForm = ({picture, onSave, onChange, saving, errors}) => {
           onClick={onSave}/>
           
       </form>
-    );
+    );        // TODO TZ Add lat/long here?
+
   } catch (ex)
   {
     return (<div>Error rendering PictureForm</div>); 

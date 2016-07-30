@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import PictureListRow from './PictureListRow';
 
-const PictureList = ({pictures, onDeletePicture}) => {
+const PictureList = ({pictures, onDelete, onEdit}) => {
   return (
     <table className="table">
       <thead>
@@ -13,7 +13,7 @@ const PictureList = ({pictures, onDeletePicture}) => {
       </thead>
       <tbody>
       {pictures.map(picture =>
-        <PictureListRow key={picture.pictureId} picture={picture} onDeletePicture={onDeletePicture}/>
+        <PictureListRow key={picture.pictureId} picture={picture} onDelete={onDelete} onEdit={onEdit}/>
       )}
       </tbody>
     </table>
@@ -22,7 +22,8 @@ const PictureList = ({pictures, onDeletePicture}) => {
 //
 PictureList.propTypes = {
   pictures: PropTypes.array.isRequired,
-  onDeletePicture : PropTypes.func.isRequired
+  onDelete : PropTypes.func.isRequired,
+  onEdit : PropTypes.func.isRequired
 };
 
 export default PictureList;
