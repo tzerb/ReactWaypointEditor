@@ -7,10 +7,12 @@ import toastr from 'toastr';
 import Map3 from  '../common/Map3';
 import * as tripActions from '../../actions/tripActions';
 import * as waypointActions from '../../actions/waypointActions';
+import * as pictureActions from '../../actions/pictureActions';
 
 import TripHeader from './TripHeader';
 
 import WaypointList from '../waypoints/WaypointList';
+import PictureList from '../pictures/PictureList';
 
 export class TripView extends React.Component {
   constructor(props, context) {
@@ -23,6 +25,9 @@ export class TripView extends React.Component {
     };
     this.onEditWaypoint = this.onEditWaypoint.bind(this);
     this.onDeleteWaypoint = this.onDeleteWaypoint.bind(this);
+
+    this.onEditPicture = this.onEditPicture.bind(this);
+    this.onDeletePicture = this.onDeletePicture.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -35,9 +40,30 @@ export class TripView extends React.Component {
     }
   }
 
+  onEditPicture(picture)
+  {
+    alert('edit picture-' + picture.pictureId);
+  }
+  
+  onDeletePicture(picture)
+  {
+    // alert('delete picture-' + picture.pictureId);
+    toastr.success('picture delete START (# pictures on this trip=' + this.props.trip.pictures.length);
+    
+    this.props.pictureActions.deletePicture(picture)
+      .then(() => { 
+                // TODO TZ - remove debugging code.
+                toastr.success('picture deleted (# pictures on this trip=' + this.props.trip.pictures.length);
+            })
+            .catch(error => {
+                toastr.error(error);
+                //this.setState({saving: false});
+            });    
+  }
+
   onEditWaypoint(waypoint)
   {
-    alert('edit-' + waypoint.waypointId);
+    alert('edit waypoint-' + waypoint.waypointId);
   }
   
   onDeleteWaypoint(waypoint)
@@ -70,7 +96,7 @@ export class TripView extends React.Component {
               <Link to={'/waypoint'}>Add Waypoint</Link>
             </div>
             <div className="col-md-3 well">
-                <WaypointList waypoints={this.props.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
+                <PictureList pictures={this.props.trip.pictures} onEdit={this.onEditPicture} onDelete={this.onDeletePicture}/>
             </div>          
           </div>
           <div className="row">
@@ -124,7 +150,8 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(tripActions, dispatch),
-    waypointActions: bindActionCreators(waypointActions, dispatch)
+    waypointActions: bindActionCreators(waypointActions, dispatch),
+    pictureActions: bindActionCreators(pictureActions, dispatch)
   };
 }
 

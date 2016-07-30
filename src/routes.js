@@ -11,6 +11,8 @@ import ManageWaypointPage from './components/waypoints/ManageWaypointPage'; //es
 
 import ManageTrackPage from './components/tracks/ManageTrackPage'; //eslint-disable-line import/no-named-as-default
 
+import ManagePicturePage from './components/pictures/ManagePicturePage'; //eslint-disable-line import/no-named-as-default
+
 import DeepLinkingIsNotEnabled from './components/errors/DeepLinkingIsNotEnabled'; //eslint-disable-line import/no-named-as-default
 import AboutPage from './components/about/AboutPage';
 
@@ -25,6 +27,9 @@ export default (
 
     <Route path="waypoint" component={ManageWaypointPage}/>
     <Route path="waypoint/:id" component={ManageWaypointPage}/>
+
+    <Route path="picture" component={ManagePicturePage}/>
+    <Route path="picture/:id" component={ManagePicturePage}/>
 
     <Route path="track/:id" component={ManageTrackPage}/>
 

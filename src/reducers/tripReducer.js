@@ -6,7 +6,7 @@ export default function tripReducer(state = initialState.trips, action) {
     switch(action.type) {
 
         case types.LOAD_TRIPS_SUCCESS:
-            return action.trips;
+            return [...action.trips];
 
         case types.CREATE_TRIP_SUCCESS:
         return [
@@ -61,6 +61,36 @@ export default function tripReducer(state = initialState.trips, action) {
         else
             return [...state];
 
+        case types.DELETE_PICTURE_SUCCESS:
+        if (action.picture.tripId && action.picture.tripId!=0)
+        {
+            let tripsWithPicture = state.filter(trip => trip.tripId == action.picture.tripId);
+            let newTrip = Object.assign({}, tripsWithPicture[0]);
+            newTrip.pictures = [...newTrip.pictures.filter(wp => wp.pictureId !== action.picture.pictureId)];
+            let newState = [
+                ...state.filter(trip => trip.tripId !== action.picture.tripId),
+                newTrip
+            ]; 
+            return [...newState];
+        }
+        else
+            return [...state];
+
+        case types.UPDATE_PICTURE_SUCCESS:
+        if (action.picture.tripId && action.picture.tripId!=0)
+        {
+            let tripsWithPicture = state.filter(trip => trip.tripId == action.picture.tripId);
+            let newTrip = Object.assign({}, tripsWithPicture[0]);
+            //alert(tripsWithPicture.length + ", " + newTrip);
+            newTrip.pictures = [...newTrip.pictures.filter(wp => wp.pictureId !== action.picture.pictureId), Object.assign({}, action.picture)];
+            let newState = [
+                ...state.filter(trip => trip.tripId !== action.picture.tripId),
+                newTrip
+            ];
+            return [...newState];
+        }
+        else
+            return [...state];
         default:
             return state;
     }
