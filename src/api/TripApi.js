@@ -2,17 +2,6 @@ import $ from 'jquery';
 import ApiConfig from './ApiConfig';
 import ApiHelpers from './ApiHelpers';
 
-const trips = [];
-
-function replaceAll(str, find, replace) {
-  return str.replace(new RegExp(find, 'g'), replace);
-}
-
-//This would be performed on the server in a real app. Just stubbing in.
-const generateId = (trip) => {
-  return replaceAll(trip.title, ' ', '-');
-};
- 
 class TripApi {
 
   static getAllTrips() {

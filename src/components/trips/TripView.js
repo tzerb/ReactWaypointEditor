@@ -11,6 +11,7 @@ import * as waypointActions from '../../actions/waypointActions';
 import TripHeader from './TripHeader';
 
 import WaypointList from '../waypoints/WaypointList';
+import PictureList from '../pictures/PictureList';
 
 export class TripView extends React.Component {
   constructor(props, context) {
@@ -30,6 +31,16 @@ export class TripView extends React.Component {
       // Necessary to populate form when existing trip is loaded directly.
       this.setState({trip: Object.assign({}, nextProps.trip)});
     }
+  }
+
+  onEditPicture(picture)
+  {
+    alert('edit-' + picture.pictureId);
+  }
+  
+  onDeletePicture(picture)
+  {
+    alert('delete-' + picture.pictureId);
   }
 
   onEditWaypoint(waypoint)
@@ -67,7 +78,7 @@ export class TripView extends React.Component {
               <Link to={'/waypoint'}>Add Waypoint</Link>
             </div>
             <div className="col-md-3 well">
-                <WaypointList waypoints={this.props.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
+                <PictureList pictures={this.props.trip.pictures} onEdit={this.onEditPicture} onDelete={this.onDeletePicture}/>
             </div>          
           </div>
         </div>

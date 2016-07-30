@@ -6,7 +6,7 @@ export default function tripReducer(state = initialState.trips, action) {
     switch(action.type) {
 
         case types.LOAD_TRIPS_SUCCESS:
-            return action.trips;
+            return [...action.trips];
 
         case types.CREATE_TRIP_SUCCESS:
         return [
