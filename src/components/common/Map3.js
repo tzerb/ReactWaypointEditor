@@ -15,31 +15,31 @@ class Map3 extends React.Component {
     
   }
 
-  componentDidUpdate(prevProps,  prevState) {
-    toastr.success('componentDidMount - ' + this._mapElement);
-    let myLatlng = new google.maps.LatLng(44.012077, -89.40526);
-    let options = {
-        zoom: 11,
-        center: myLatlng,
-        mapTypeId: google.maps.MapTypeId.TERRAIN
-    }            
-    this._map = new google.maps.Map(document.getElementById("map_canvas"), options);
-    if (this.props.waypoints)
-    {
-      this.props.waypoints.map((wp) => 
-      {
-        toastr.success(wp.name)
-        let marker = new google.maps.Marker({
-            position: new google.maps.LatLng(44.012077, -89.40526),
-            map: this._map,
-            title: wp.name
-        });
+  // componentDidUpdate(prevProps,  prevState) {
+  //   toastr.success('componentDidMount - ' + this._mapElement);
+  //   let myLatlng = new google.maps.LatLng(44.012077, -89.40526);
+  //   let options = {
+  //       zoom: 11,
+  //       center: myLatlng,
+  //       mapTypeId: google.maps.MapTypeId.TERRAIN
+  //   }            
+  //   this._map = new google.maps.Map(document.getElementById("map_canvas"), options);
+  //   if (this.props.waypoints)
+  //   {
+  //     this.props.waypoints.map((wp) => 
+  //     {
+  //       toastr.success(wp.name)
+  //       let marker = new google.maps.Marker({
+  //           position: new google.maps.LatLng(wp.latitude, wp.longitude),
+  //           map: this._map,
+  //           title: wp.name
+  //       });
         
-      });
-    }    
+  //     });
+  //   }    
 
-    //this._input.focus();
-  }
+  //   //this._input.focus();
+  // }
 
   renderMap(el)
   {
