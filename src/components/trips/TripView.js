@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import toastr from 'toastr';
-import Map3 from  '../common/Map3';
+import Map4 from  '../common/Map4';
 import * as tripActions from '../../actions/tripActions';
 import * as waypointActions from '../../actions/waypointActions';
 import * as pictureActions from '../../actions/pictureActions';
@@ -96,13 +96,13 @@ export class TripView extends React.Component {
               <Link to={'/waypoint'}>Add Waypoint</Link>
             </div>
             <div className="col-md-3 well">
-                <PictureList pictures={this.props.trip.pictures} onEdit={this.onEditPicture} onDelete={this.onDeletePicture}/>
+              <Map4 waypoints={this.props.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
+            </div>
+            <div className="col-md-3 well">
+              <PictureList pictures={this.props.trip.pictures} onEdit={this.onEditPicture} onDelete={this.onDeletePicture}/>
             </div>          
           </div>
           <div className="row">
-            <div className="col-md-12 well">
-              <Map3 waypoints={this.props.trip.waypoints}/>
-            </div>
           </div>
         </div>
       );
