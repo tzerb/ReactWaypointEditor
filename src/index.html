@@ -4,23 +4,31 @@
     <title>Waypoint Editor</title>
   </head>
   <body>
+    <table>
+      <tr>
+        <td><div id="map_canvas_test" style="height: 250px; width: 250px">here</div></td>
+        <td><div id="map_canvas" style="height: 250px; width: 250px"></div></td>
+      </tr>
+    </table>
+	  
+    
+
     <div id="app"></div>
     <img class="my_image_class"/>
     <img src="./Images/marker.png"/>
-    <div id="map_canvas" style="height: 250px; width: 250px"></div>
     <script type="text/javascript"
           src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCG_KuXMd6mrgAzrRcgXr91Yr6Ed03VNaw&libraries=geometry,places,visualization">
     </script>
     <script src="/bundle.js"></script>
 
-    <!--<script   src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
+    <script   src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
     <script type="text/javascript">
       $(document).ready(function() {
         initMap();
       });
       function initMap() {
         var originalMapCenter = new google.maps.LatLng(-25.363882, 131.044922);
-        var map = new google.maps.Map(document.getElementById('map_canvas'), {
+        var map = new google.maps.Map(document.getElementById('map_canvas_test'), {
           zoom: 4,
           center: originalMapCenter
         });
@@ -36,7 +44,6 @@
         });
       }
  
-    </script>-->
-    <div id="map_canvas_test">here</div>
+    </script>
   </body>
 </html>

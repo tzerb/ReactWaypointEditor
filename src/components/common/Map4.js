@@ -17,10 +17,7 @@ class Map4 extends React.Component {
 
     try {
 
-      // GoogleMapsLoader.load(function(google) {
-      //   center = new google.maps.LatLng(44.012077, -89.40526);
-      // });
-      
+      center = new google.maps.LatLng(44.012077, -89.40526);
       this.hasMap = true;
     }
     catch(ex)
@@ -32,7 +29,7 @@ class Map4 extends React.Component {
     this.state = {
       waypoints: Object.assign({}, this.props.waypoints),
       zoom: 6,
-      center: this.center,
+      center: center,
       hasMap : this.hasMap
     };
 
@@ -57,10 +54,9 @@ class Map4 extends React.Component {
 
           //let mapElement = this._mapElement;
 
-          let myLatlng = new google.maps.LatLng(44.012077, -89.40526);
           let options = {
               zoom: this.state.zoom,
-              center: this.state.myLatlng
+              center: this.state.center
           };
           this._map = new google.maps.Map(mapElement, options);
 
