@@ -5,8 +5,8 @@ export default function tripReducer(state = initialState.pictures, action) {
     switch(action.type) {
         case types.LOAD_PICTURES_SUCCESS:
             return [...action.pictures];
-	    default:    
-	        return state;
+        default:    
+            return state;
 
         case types.CREATE_PICTURE_SUCCESS:
         return [

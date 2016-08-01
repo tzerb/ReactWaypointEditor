@@ -118,7 +118,9 @@ export class TripView extends React.Component {
 TripView.propTypes = {
   trip: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
-  waypointActions: PropTypes.object.isRequired
+  waypointActions: PropTypes.object.isRequired,
+  pictureActions: PropTypes.object.isRequired
+
 };
 
 //Pull in the React Router context so router is available on this.context.router.
