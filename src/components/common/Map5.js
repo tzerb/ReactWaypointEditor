@@ -25,47 +25,55 @@ class SingletonMap {
 
             if (_this._parentElement != null)
             {
-                _this.appendMap(_this._parentElement, _this.deleteFunction, _this.insertFunction, _this.editFunction);
+                _this.appendMap(_this._parentElement, _this.deleteFunction, _this.insertFunction, _this.editFunction, _this.zoomChangedFunction, _this.positionChangedFunction);
             }
 
-            _this._map.addListener("click", function() {
-                //let curpos = 
-                _this.insertFunction(1, 2);
-            })
+            _this._map.addListener("click", function(event) {
+                _this.insertFunction(event.latLng.lat(), event.latLng.lng());
+            });
+
+            _this._map.addListener('zoom_changed', function() {
+                _this.zoomChangedFunction(_this._map.getZoom());
+            });
+
+            _this._map.addListener('dragend', function() {
+                _this.positionChangedFunction(_this._map.getCenter());
+            });
+
             toastr.success('SingletonMap done loading');
 
         });       
         
     }
 
-    addMarker()
+    addMarker(name, lat, lng, tag)
     {
         let _this = this;
         GoogleMapsLoader.load(function(google) {
             let marker = new google.maps.Marker({
-                position: new google.maps.LatLng(44.012077, -89.40526),
+                position: new google.maps.LatLng(lat, lng),
                 map: _this._map,
-                title: 'wp.name'
+                title: name
             });
 
-            let wp = { name: "wp in marker", lat: 44.012077, lng: -89.40526 };
-            marker.tag = wp;
+            marker.tag = tag;
 
             marker.addListener('click', function() {
                 _this.editFunction(marker.tag);
-            });            
+            });       
+
             marker.addListener('rightclick', function() {
                 _this.deleteFunction(marker.tag);
             });                
         });
     }
 
-    appendMap2(deleteFunction, insertFunction, editFunction)
+    appendMap2(deleteFunction, insertFunction, editFunction, zoomChangedFunction, positionChangedFunction)
     {
-        this.appendMap(this._parentElement, deleteFunction, insertFunction, editFunction);
+        this.appendMap(this._parentElement, deleteFunction, insertFunction, editFunction, zoomChangedFunction, positionChangedFunction);
     }
     
-    appendMap(parentElement, deleteFunction, insertFunction, editFunction)
+    appendMap(parentElement, deleteFunction, insertFunction, editFunction, zoomChangedFunction, positionChangedFunction)
     {
         let mapElement = document.getElementById("map_canvas");
         if (mapElement != null && parentElement != null) {
@@ -83,6 +91,8 @@ class SingletonMap {
         this.deleteFunction = deleteFunction;
         this.insertFunction = insertFunction;
         this.editFunction = editFunction;
+        this.zoomChangedFunction = zoomChangedFunction;
+        this.positionChangedFunction = positionChangedFunction;
     }
 
     releaseMap()
@@ -111,7 +121,7 @@ class Map5 extends React.Component {
 
 	componentDidMount(prevProps,  prevState) {
         toastr.success('componentDidMount');
-        _SingletonMap.appendMap2(this.deleteWaypoint, this.insertWaypoint, this.editWaypoint);
+        _SingletonMap.appendMap2(this.deleteWaypoint, this.insertWaypoint, this.editWaypoint, this.zoomChangedFunction, this.positionChangedFunction);
     }
 
     componentWillUnmount() {
@@ -136,16 +146,34 @@ class Map5 extends React.Component {
         alert('editWaypoint - ' + wp.name);
     }
 
+    zoomChangedFunction(zoom)
+    {
+	    alert('zoomChangedFunction - ' + zoom);
+    }
+
+    positionChangedFunction(centerPosition)
+    {
+	    alert('positionChangedFunction - ' + centerPosition.lat() + '-' + centerPosition.lng());
+    }
+
     setElement(c)
     {
         toastr.success('set element ' + c);
         // _SingletonMap._mapElement=c;
-        _SingletonMap.appendMap(c, this.deleteWaypoint, this.insertWaypoint, this.editWaypoint);
+        _SingletonMap.appendMap(c, this.deleteWaypoint, this.insertWaypoint, this.editWaypoint, this.zoomChangedFunction, this.positionChangedFunction);
     }
 
     addMyMarker()
     {
-        _SingletonMap.addMarker();
+        let wp1 = { name: "wp 1", lat: 44.012077, lng: -89.40526 };
+        let wp2 = { name: "wp 2", lat: 43.012077, lng: -89.40526 };
+        let wp3 = { name: "wp 3", lat: 44.012077, lng: -88.40526 };
+        let wp4 = { name: "wp 4", lat: 43.012077, lng: -88.40526 };
+        
+        _SingletonMap.addMarker(wp1.name, wp1.lat, wp1.lng, wp1);
+        _SingletonMap.addMarker(wp2.name, wp2.lat, wp2.lng, wp2);
+        _SingletonMap.addMarker(wp3.name, wp3.lat, wp3.lng, wp3);
+        _SingletonMap.addMarker(wp4.name, wp4.lat, wp4.lng, wp4);
     }
 
     render() {
