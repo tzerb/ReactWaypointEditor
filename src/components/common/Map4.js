@@ -38,7 +38,7 @@ class Map4 extends React.Component {
   }
 
   componentDidMount(prevProps,  prevState) {
-    toastr.success('componentDidMount - ' + this._mapElement);
+    //toastr.success('componentDidMount - ' + this._mapElement);
     toastr.success('componentDidMount - zoom = ' + this.state.zoom);
 
     // GoogleMapsLoader.KEY = 'AIzaSyCG_KuXMd6mrgAzrRcgXr91Yr6Ed03VNaw';
@@ -160,7 +160,7 @@ class Map4 extends React.Component {
         </tbody>
       </table>
       <div width="200">{this.state.zoom}<br/>{'hasMap = ' + this.state.hasMap}</div><button onClick={this.buttonClicked}>zoom</button>
-      <div id="map_canvas4" style={mapStyles} ref={(c) => this._mapElement = c}></div>
+            <div id="map_canvas4" width="400" ref={(c) => this._mapElement = c}></div>
       </div>
     }
 

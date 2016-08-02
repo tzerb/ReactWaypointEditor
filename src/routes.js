@@ -14,6 +14,7 @@ import ManageTrackPage from './components/tracks/ManageTrackPage'; //eslint-disa
 import ManagePicturePage from './components/pictures/ManagePicturePage'; //eslint-disable-line import/no-named-as-default
 
 import DeepLinkingIsNotEnabled from './components/errors/DeepLinkingIsNotEnabled'; //eslint-disable-line import/no-named-as-default
+import Map5 from './components/common/Map5'; //eslint-disable-line import/no-named-as-default
 import AboutPage from './components/about/AboutPage';
 
 export default (
@@ -32,6 +33,8 @@ export default (
     <Route path="picture/:id" component={ManagePicturePage}/>
 
     <Route path="track/:id" component={ManageTrackPage}/>
+
+    <Route path="map5" component={Map5}/>
 
     <route path="ndl" component={DeepLinkingIsNotEnabled}/>
     <Route path="about" component={AboutPage}/>
