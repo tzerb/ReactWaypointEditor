@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import PictureApi from '../api/PictureApi';
+import ApiSelector from '../api/ApiSelector';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 
 export function createPictureSuccess(picture)
@@ -29,7 +29,7 @@ export function deletePictureWaypointSuccess(picture, waypoint)
 
 export function loadPictures() {
     return function (dispatch){
-        return PictureApi.getAllPictures().then(pictures => {
+        return ApiSelector.PictureApi().getAllPictures().then(pictures => {
             dispatch(loadPictureSuccess(pictures));
         }).catch (error => {
             throw(error);
@@ -40,7 +40,7 @@ export function loadPictures() {
 export function savePicture(picture) {
   return function (dispatch, getState) {
     dispatch(beginAjaxCall());
-    return PictureApi.savePicture(picture).then(picture => {
+    return ApiSelector.PictureApi().savePicture(picture).then(picture => {
         if (picture.pictureId)
         {
             dispatch(updatePictureSuccess(picture));
@@ -61,7 +61,7 @@ export function savePicture(picture) {
 export function deletePicture(picture) {
   return function (dispatch, getState) {
     dispatch(beginAjaxCall());
-    return PictureApi.deletePicture(picture.pictureId).then(t => {
+    return ApiSelector.PictureApi().deletePicture(picture.pictureId).then(t => {
         dispatch(deletePictureSuccess(picture));
     }).catch(error => {
       dispatch(ajaxCallError(error));

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import toastr from 'toastr';
-import Map4 from  '../common/Map4';
+import Map5 from  '../common/Map5';
 import * as tripActions from '../../actions/tripActions';
 import * as waypointActions from '../../actions/waypointActions';
 import * as pictureActions from '../../actions/pictureActions';
@@ -13,6 +13,7 @@ import TripHeader from './TripHeader';
 
 import WaypointList from '../waypoints/WaypointList';
 import PictureList from '../pictures/PictureList';
+import ApiConfig from '../../api/ApiConfig';
 
 export class TripView extends React.Component {
   constructor(props, context) {
@@ -91,19 +92,29 @@ export class TripView extends React.Component {
         <div className=""> 
           <div className="row">
             <TripHeader trip={this.props.trip}/>
-            <div className="col-md-3 well">
+            <div className="col-md-5 well">
               <WaypointList waypoints={this.props.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
               <Link to={'/waypoint'}>Add Waypoint</Link>
             </div>
-            <div className="col-md-3 well">
-              <Map4 waypoints={this.props.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
-            </div>
-            <div className="col-md-3 well">
+            <div className="col-md-5 well">
               <PictureList pictures={this.props.trip.pictures} onEdit={this.onEditPicture} onDelete={this.onDeletePicture}/>
             </div>          
           </div>
+          {!ApiConfig.SimulateMap && 
           <div className="row">
+            <div className="col-md-12 well">
+              <Map5 waypoints={this.props.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
+            </div>
           </div>
+          }
+          {ApiConfig.SimulateMap && 
+          <div className="row">
+            <div className="col-md-12 well">
+              <div>map simulation</div>
+              <WaypointList waypoints={this.props.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
+            </div>
+          </div>
+          }          
         </div>
       );
     }

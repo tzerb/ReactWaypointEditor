@@ -40,7 +40,7 @@ class TripPage extends React.Component {
 
 TripPage.propTypes = {
     trips: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequried
+    actions: PropTypes.object
 };
 
 function mapStateToProps(state, ownProps)
@@ -49,7 +49,7 @@ function mapStateToProps(state, ownProps)
         trips: state.trips
     };
 }
-
+ 
 function mapDispatchToProps(dispatch) {
     return {
         // createTrip: trip => dispatch(tripActions.createTrip(trip))

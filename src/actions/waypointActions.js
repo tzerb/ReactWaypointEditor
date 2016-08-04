@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import WaypointApi from '../api/WaypointApi';
+import ApiSelector from '../api/ApiSelector';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 
 export function createWaypointSuccess(waypoint)
@@ -29,7 +29,7 @@ export function deleteWaypointSuccess(waypoint)
 
 export function loadWaypoints() {
     return function (dispatch){
-        return WaypointApi.getAllWaypoints().then(waypoints => {
+        return ApiSelector.WaypointApi().getAllWaypoints().then(waypoints => {
             dispatch(loadWaypointSuccess(waypoints));
         }).catch (error => {
             throw(error);
@@ -40,7 +40,7 @@ export function loadWaypoints() {
 export function saveWaypoint(waypoint) {
   return function (dispatch, getState) {
     dispatch(beginAjaxCall());
-    return WaypointApi.saveWaypoint(waypoint).then(waypoint => {
+    return ApiSelector.WaypointApi().saveWaypoint(waypoint).then(waypoint => {
         if (waypoint.waypointId)
         {
             dispatch(updateWaypointSuccess(waypoint));
@@ -59,7 +59,7 @@ export function saveWaypoint(waypoint) {
 export function deleteWaypoint(waypoint) {
   return function (dispatch, getState) {
     dispatch(beginAjaxCall());
-    return WaypointApi.deleteWaypoint(waypoint).then(waypoint => {
+    return ApiSelector.WaypointApi().deleteWaypoint(waypoint).then(waypoint => {
         dispatch(deleteWaypointSuccess(waypoint));
     }).catch(error => {
       dispatch(ajaxCallError(error));

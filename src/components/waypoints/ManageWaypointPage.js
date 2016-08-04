@@ -115,6 +115,7 @@ function getwaypointById(waypoints, waypointId) {
 function mapStateToProps(state, ownProps) {
   const waypointId = ownProps.params.id; // from the path `/waypoint/:id`
 
+// TODO TZ - refactor
   let waypoint = {
       tripId: 1, 
       latitude: 43.905967197,
@@ -122,8 +123,8 @@ function mapStateToProps(state, ownProps) {
       waypointId: null,
       waypointFileId: 1,
       dateTime: "2016-07-07T18:49:39",
-      description: "WP004x",
-      name: "WP004x",
+      description: "DEFAULT WAYPOINT",
+      name: "DEFAULT WAYPOINT",
       depth: 0,
       type: 0,
       visible: false
