@@ -3,35 +3,51 @@ import delay from './delay';
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
 // All calls return promises.
-const pictures = [
-    {
-      "pictureId": 1,
-      "name": null,
-      "description": "IMG_0319.JPG",
-      "dateTime": "2016-07-07T17:34:21",
-      "latitude": 43.9547805555556,
-      "longitude": -88.6805638888889,
-      "imageBytes": ""
-    },    
-    {
-      "pictureId": 2,
-      "name": null,
-      "description": "IMG_0319.JPG",
-      "dateTime": "2016-07-07T17:34:21",
-      "latitude": 43.9547805555556,
-      "longitude": -88.6805638888889,
-      "imageBytes": ""
-    }
+const pictures = 
+[
+  {
+    "pictureId": 11,
+    "name": "IMG_0319 - Copy.JPG",
+    "description": "IMG_0319 - Copy.JPG",
+    "dateTime": "2016-07-07T00:00:00",
+    "latitude": 43.9547805555556,
+    "longitude": -88.6805638888889,
+    "imageBytes": null,
+    "tripId": 1,
+    "createdBy": "default",
+    "createdDate": "2016-07-30T12:24:46.677",
+    "modifiedBy": "default",
+    "modifiedDate": "2016-08-01T17:07:25.197"
+  },
+  {
+    "pictureId": 13,
+    "name": "IMG_0319 - Copy (2).JPG",
+    "description": "IMG_0319 - Copy (2).JPG",
+    "dateTime": "2016-07-07T17:34:21",
+    "latitude": 43.9547805555556,
+    "longitude": -88.6805638888889,
+    "imageBytes": null,
+    "tripId": 1,
+    "createdBy": "default",
+    "createdDate": "2016-07-30T22:22:35.063",
+    "modifiedBy": "default",
+    "modifiedDate": "2016-07-30T22:22:35.063"
+  }
 ];
 
-function replaceAll(str, find, replace) {
-  return str.replace(new RegExp(find, 'g'), replace);
-}
-
 //This would be performed on the server in a real app. Just stubbing in.
-const generateId = (trip) => {
-  return replaceAll(trip.title, ' ', '-');
+const generateId = (picture) => {
+  let maxPictureId = 0;
+  for(let i = 0; i<pictures.length; i++)
+  {
+    maxPictureId = Math.max(maxPictureId, pictures[i].pictureId);
+  }
+  return maxPictureId+1;
 };
+
+// const generateId = (trip) => {
+//   return replaceAll(trip.title, ' ', '-');
+// };
 
 class TripApi {
 

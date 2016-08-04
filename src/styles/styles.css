@@ -32,3 +32,12 @@ nav {
   border:2;
   background: url('../Images/marker.png')
 }
+
+#map_canvas4
+{
+  width: 400;
+  height: 300;
+  background-color: blue;
+  border-bottom: 100px;
+  margin: 10px, 10px, 10px, 10px;
+}

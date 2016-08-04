@@ -94,7 +94,7 @@ export class TripView extends React.Component {
             <TripHeader trip={this.props.trip}/>
             <div className="col-md-5 well">
               <WaypointList waypoints={this.props.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
-              <Link to={'/waypoint'}>Add Waypoint</Link>
+              <Link to={'/waypoint/?tripId=' + this.props.trip.tripId}>Add Waypoint</Link>
             </div>
             <div className="col-md-5 well">
               <PictureList pictures={this.props.trip.pictures} onEdit={this.onEditPicture} onDelete={this.onDeletePicture}/>
@@ -102,7 +102,7 @@ export class TripView extends React.Component {
           </div>
           {!ApiConfig.SimulateMap && 
           <div className="row">
-            <div className="col-md-12 well">
+            <div className="col-md-12">
               <Map5 waypoints={this.props.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
             </div>
           </div>

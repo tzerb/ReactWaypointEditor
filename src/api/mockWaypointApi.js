@@ -3,49 +3,52 @@ import delay from './delay';
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
 // All calls return promises.
-const waypoints = [
-    {
-      "latitude": 43.905967197,
-      "longitude": -88.428131393,
-      "waypointId": 1,
-      "dateTime": "2016-07-07T18:49:39",
-      "description": "WP004",
-      "name": "WP004",
-      "depth": 0,
-      "type": 0,
-      "visible": false
-    },
-    {
-      "latitude": 43.905967197,
-      "longitude": -88.428131393,
-      "waypointId": 2,
-      "dateTime": "2016-07-07T18:49:39",
-      "description": "WP004",
-      "name": "WP004",
-      "depth": 0,
-      "type": 0,
-      "visible": false
-    },
-    {
-      "latitude": 43.905967197,
-      "longitude": -88.428131393,
-      "waypointId": 3,
-      "dateTime": "2016-07-07T18:49:39",
-      "description": "TESTER",
-      "name": "TESTER",
-      "depth": 0,
-      "type": 0,
-      "visible": false
-    }    
+const waypoints = 
+[
+  {
+    "latitude": 43.905967197,
+    "longitude": -88.428131393,
+    "waypointId": 88,
+    "dateTime": "2016-07-07T18:49:39",
+    "description": "DEFAULT WAYPOINT",
+    "name": "DEFAULT WAYPOINT",
+    "depth": 0,
+    "type": 0,
+    "visible": false,
+    "tripId": 1,
+    "waypointFileId": 1,
+    "createdBy": "default",
+    "createdDate": "2016-08-04T13:17:05.873",
+    "modifiedBy": "default",
+    "modifiedDate": "2016-08-04T13:17:05.873"
+  },
+  {
+    "latitude": 44.905967197,
+    "longitude": -89.428131393,
+    "waypointId": 89,
+    "dateTime": "2016-07-07T18:49:39",
+    "description": "DEFAULT WAYPOINT",
+    "name": "DEFAULT WAYPOINT",
+    "depth": 0,
+    "type": 0,
+    "visible": false,
+    "tripId": 1,
+    "waypointFileId": 1,
+    "createdBy": "default",
+    "createdDate": "2016-08-04T13:18:09.5",
+    "modifiedBy": "default",
+    "modifiedDate": "2016-08-04T13:18:09.5"
+  }
 ];
-
-function replaceAll(str, find, replace) {
-  return str.replace(new RegExp(find, 'g'), replace);
-}
 
 //This would be performed on the server in a real app. Just stubbing in.
 const generateId = (waypoint) => {
-  return replaceAll(waypoint.name, ' ', '-');
+  let maxWaypointId = 0;
+  for(let i = 0; i<waypoints.length; i++)
+  {
+    maxWaypointId = Math.max(maxWaypointId, waypoints[i].waypointId);
+  }
+  return maxWaypointId+1;
 };
 
 class WaypointApi {
@@ -66,7 +69,7 @@ class WaypointApi {
         // Simulate server-side validation
         const minWaypointNameLength = 1;
         if (waypoint.name.length < minWaypointNameLength) {
-          reject(`Name must be at least ${minWaypointTitleLength} characters.`);
+          reject(`Name must be at least ${minWaypointNameLength} characters.`);
         }
         if (waypoint.waypointId) {
           const existingWaypointIndex = waypoints.findIndex(a => a.waypointId == waypoint.waypointId);
@@ -85,7 +88,6 @@ class WaypointApi {
   }
 
   static deleteWaypoint(waypointId) {
-    alert('deleteWaypoint');
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         const indexOfWaypointToDelete = waypoints.findIndex(waypoint => {

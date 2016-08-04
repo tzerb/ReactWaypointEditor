@@ -3,89 +3,94 @@ import delay from './delay';
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
 // All calls return promises.
-const trips = [
-{
-  "tripId": 1,
-  "title": "7/7/2016",
-  "description": "07/07/2016",
-  "dateTime": "2016-07-07T00:00:00",
-  "tracks": [{trackId:1}],
-  "waypoints": [
-    {
-      "latitude": 43.905967197,
-      "longitude": -88.428131393,
-      "waypointId": 1,
-      "dateTime": "2016-07-07T18:49:39",
-      "description": "WP004",
-      "name": "WP004",
-      "depth": 0,
-      "type": 0,
-      "visible": false
-    }
-  ],
-  "pictures": [
-    {
-      "pictureId": 1,
-      "name": null,
-      "description": "IMG_0319.JPG",
-      "dateTime": "2016-07-07T17:34:21",
-      "latitude": 43.9547805555556,
-      "longitude": -88.6805638888889,
-      "imageBytes": ""
-    }
-  ]
-},
-{
-  "tripId": 2,
-  "title": "7/8/2016",
-  "description": "07/07/2016",
-  "dateTime": "2016-07-07T00:00:00",
-  "tracks": [{trackId:2}],
-  "waypoints": [
-    {
-      "latitude": 43.905967197,
-      "longitude": -88.428131393,
-      "waypointId": 2,
-      "dateTime": "2016-07-07T18:49:39",
-      "description": "WP004",
-      "name": "WP004",
-      "depth": 0,
-      "type": 0,
-      "visible": false
-    },
-    {
-      "latitude": 43.905967197,
-      "longitude": -88.428131393,
-      "waypointId": 3,
-      "dateTime": "2016-07-07T18:49:39",
-      "description": "TESTER",
-      "name": "TESTER",
-      "depth": 0,
-      "type": 0,
-      "visible": false
-    }    
-  ],
-  "pictures": [
-    {
-      "pictureId": 2,
-      "name": null,
-      "description": "IMG_0319.JPG",
-      "dateTime": "2016-07-07T17:34:21",
-      "latitude": 43.9547805555556,
-      "longitude": -88.6805638888889,
-      "imageBytes": ""
-    }
-  ]
-}
+const trips = 
+[
+  {
+    "tripId": 1,
+    "title": "Trip Title",
+    "description": "07/07/2016",
+    "dateTime": "2016-07-07T00:00:00",
+    "tracks": [],
+    "waypoints": [
+      {
+        "latitude": 43.905967197,
+        "longitude": -88.428131393,
+        "waypointId": 88,
+        "dateTime": "2016-07-07T18:49:39",
+        "description": "DEFAULT WAYPOINT",
+        "name": "DEFAULT WAYPOINT",
+        "depth": 0,
+        "type": 0,
+        "visible": false,
+        "tripId": 1,
+        "waypointFileId": 1,
+        "createdBy": "default",
+        "createdDate": "2016-08-04T13:17:05.873",
+        "modifiedBy": "default",
+        "modifiedDate": "2016-08-04T13:17:05.873"
+      },
+      {
+        "latitude": 44.905967197,
+        "longitude": -89.428131393,
+        "waypointId": 89,
+        "dateTime": "2016-07-07T18:49:39",
+        "description": "DEFAULT WAYPOINT",
+        "name": "DEFAULT WAYPOINT",
+        "depth": 0,
+        "type": 0,
+        "visible": false,
+        "tripId": 1,
+        "waypointFileId": 1,
+        "createdBy": "default",
+        "createdDate": "2016-08-04T13:18:09.5",
+        "modifiedBy": "default",
+        "modifiedDate": "2016-08-04T13:18:09.5"
+      }
+    ],
+    "pictures": [
+      {
+        "pictureId": 11,
+        "name": "IMG_0319 - Copy.JPG",
+        "description": "IMG_0319 - Copy.JPG",
+        "dateTime": "2016-07-07T00:00:00",
+        "latitude": 43.9547805555556,
+        "longitude": -88.6805638888889,
+        "imageBytes": "",
+        "tripId": 1,
+        "createdBy": "default",
+        "createdDate": "2016-07-30T12:24:46.677",
+        "modifiedBy": "default",
+        "modifiedDate": "2016-08-01T17:07:25.197"
+      },
+      {
+        "pictureId": 13,
+        "name": "IMG_0319 - Copy (2).JPG",
+        "description": "IMG_0319 - Copy (2).JPG",
+        "dateTime": "2016-07-07T17:34:21",
+        "latitude": 43.9547805555556,
+        "longitude": -88.6805638888889,
+        "imageBytes": "",
+        "tripId": 1,
+        "createdBy": "default",
+        "createdDate": "2016-07-30T22:22:35.063",
+        "modifiedBy": "default",
+        "modifiedDate": "2016-07-30T22:22:35.063"
+      }
+    ],
+    "createdBy": "default",
+    "createdDate": "2016-07-30T10:49:15.417",
+    "modifiedBy": "default",
+    "modifiedDate": "2016-07-30T12:14:45.52"
+  }
 ];
 
-function replaceAll(str, find, replace) {
-  return str.replace(new RegExp(find, 'g'), replace);
-}
-
-//This would be performed on the server in a real app. Just stubbing in.
-const generateId = (trip) => {
-  return replaceAll(trip.title, ' ', '-');
+const generateId = (picture) => {
+  let maxTripId = 0;
+  for(let i = 0; i<trips.length; i++)
+  {
+    maxTripId = Math.max(maxTripId, trips[i].tripId);
+  }
+  return maxTripId+1;
 };
 
 class TripApi {

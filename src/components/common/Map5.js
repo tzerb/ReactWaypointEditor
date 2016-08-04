@@ -25,10 +25,6 @@ class SingletonMap {
             };
             _this._map = new google.maps.Map(mapElement, options);
  
-            if (_this._parentElement != null)
-            {
-                _this.appendMap(_this._parentElement, _this.deleteFunction, _this.insertFunction, _this.editFunction, _this.zoomChangedFunction, _this.positionChangedFunction);
-            }
 
             _this._map.addListener("click", function(event) {
                 _this.insertFunction(event.latLng.lat(), event.latLng.lng());
@@ -44,6 +40,12 @@ class SingletonMap {
 
             //toastr.success('SingletonMap done loading');
             _this.loaded = true;
+            toastr.success('map loaded');
+
+            if (_this._parentElement != null)
+            {
+                _this.appendMap(_this._parentElement, _this.deleteFunction, _this.insertFunction, _this.editFunction, _this.zoomChangedFunction, _this.positionChangedFunction);
+            }
 
         });       
          
@@ -79,6 +81,7 @@ class SingletonMap {
     
     appendMap(parentElement, deleteFunction, insertFunction, editFunction, zoomChangedFunction, positionChangedFunction)
     {
+        toastr.success('appendMap')
         let mapElement = document.getElementById("map_canvas");
         if (mapElement != null && parentElement != null) {
             mapElement.style.display='block';
@@ -202,17 +205,17 @@ class Map5 extends React.Component {
                 toastr.success(wp.name);
             }
         }
-    }
+    }  
  
     render() {
         toastr.success('render map5');
-        // _SingletonMap.clearMarkers();
-        // this.addMarkers2(); 
+        _SingletonMap.clearMarkers();
+        this.addMarkers2(); 
         return (
             <div className="row" >
-                {this.props.waypoints && (this.props.waypoints.length > 0) && <button onClick={this.addMarkers2}>click</button>}
-                <div className="col-md-12 well">
-                    <div id="map_canvas4" width="400" ref={this.setElement}></div>
+                {false && this.props.waypoints && (this.props.waypoints.length > 0) && <button onClick={this.addMarkers2}>click</button>}
+                <div className="col-md-12">
+                    <div id="map_canvas4"  ref={this.setElement}></div>
                 </div>
             </div>
         );

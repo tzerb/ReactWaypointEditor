@@ -78,7 +78,7 @@ export class ManageWaypointPage extends React.Component {
   redirect() {
     this.setState({saving: false});
     toastr.success('waypoint saved.');
-    this.context.router.push('/tripview/1');
+    this.context.router.push('/tripview/' + this.props.location.query.tripId);
   }
 
   render() {
@@ -115,9 +115,11 @@ function getwaypointById(waypoints, waypointId) {
 function mapStateToProps(state, ownProps) {
   const waypointId = ownProps.params.id; // from the path `/waypoint/:id`
 
+  let tripId = ownProps.location.query.tripId;
+
 // TODO TZ - refactor
   let waypoint = {
-      tripId: 1, 
+      tripId: tripId, 
       latitude: 43.905967197,
       longitude: -88.428131393,
       waypointId: null,

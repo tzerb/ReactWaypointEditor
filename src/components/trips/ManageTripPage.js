@@ -117,7 +117,7 @@ function getTripById(trips, tripId) {
 function mapStateToProps(state, ownProps) {
   const tripId = ownProps.params.id; // from the path `/trip/:id`
 
-  let trip = {id: '', title: '' };
+  let trip = {tripId: null, title: 'title', description: 'description', dateTime: '01/01/2015', waypoints:[], pictures:[]};
 
   if (tripId && state.trips.length > 0) {
     trip = getTripById(state.trips, tripId);
