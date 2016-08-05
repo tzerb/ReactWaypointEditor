@@ -1,7 +1,15 @@
 
 import $ from 'jquery';
+import ApiConfig from './ApiConfig';
+
 export default class ApiHelpers {
 
+    static pictureURL(picture)
+    {
+        // TODO TZ - there is a similiar funciton in ApiSelector.js
+        return ApiConfig.ApiServer + '/Pictures/Image?pictureId=' + picture.pictureId;
+    }
+ 
 	static formatErrorMessage(jqXHR, exception) {
         //http://stackoverflow.com/questions/377644/jquery-ajax-error-handling-show-custom-exception-messages
         if (jqXHR.status === 0) {

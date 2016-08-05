@@ -5,6 +5,8 @@ import {bindActionCreators} from 'redux';
 
 import toastr from 'toastr';
 import Map5 from  '../common/Map5';
+import LightboxView from  '../common/LightboxView';
+
 import * as tripActions from '../../actions/tripActions';
 import * as waypointActions from '../../actions/waypointActions';
 import * as pictureActions from '../../actions/pictureActions';
@@ -14,6 +16,7 @@ import TripHeader from './TripHeader';
 import WaypointList from '../waypoints/WaypointList';
 import PictureList from '../pictures/PictureList';
 import ApiConfig from '../../api/ApiConfig';
+import ApiHelpers from '../../api/ApiHelpers';
 
 export class TripView extends React.Component {
   constructor(props, context) {
@@ -86,7 +89,10 @@ export class TripView extends React.Component {
   render() {
     // TODO TZ - remove debugging code.
     //toastr.warning('render');
-    
+    for(let i=0; i<this.props.trip.pictures.length; i++)
+    {
+      this.props.trip.pictures[i].src = ApiHelpers.pictureURL(this.props.trip.pictures[i]);
+    }
     try {
       return (   
         <div className=""> 
@@ -97,6 +103,7 @@ export class TripView extends React.Component {
               <Link to={'/waypoint/?tripId=' + this.props.trip.tripId}>Add Waypoint</Link>
             </div>
             <div className="col-md-5 well">
+              <LightboxView pictures={this.props.trip.pictures} />
               <PictureList pictures={this.props.trip.pictures} onEdit={this.onEditPicture} onDelete={this.onDeletePicture}/>
             </div>          
           </div>
@@ -114,7 +121,13 @@ export class TripView extends React.Component {
               <WaypointList waypoints={this.props.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
             </div>
           </div>
-          }          
+          }     
+          <div className="row">
+            <div className="col-md-12 well">
+              <div>Lightbox View</div>
+              
+            </div>
+          </div>               
         </div>
       );
     }

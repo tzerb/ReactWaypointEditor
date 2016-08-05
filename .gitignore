@@ -37,3 +37,5 @@ dist
 
 # NPM log files
 npm-debug.log.*
+
+*.out
