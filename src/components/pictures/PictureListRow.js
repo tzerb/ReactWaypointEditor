@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import ApiSelector from '../../api/ApiSelector';
+import PictureEditPopup from './PictureEditPopup';
 
 class PictureListRow extends React.Component {
     constructor(props, context)    {
@@ -24,7 +25,7 @@ class PictureListRow extends React.Component {
     render() {
         return (
           <tr>
-            <td><Link to={'/picture/'+this.props.picture.pictureId}>edit</Link> <a onClick = {this.onLocalEdit}>edit</a> <a onClick = {this.onLocalDelete}>delete</a></td>
+            <td><PictureEditPopup picture={this.props.picture}/>  <a onClick = {this.onLocalEdit}>edit</a> <a onClick = {this.onLocalDelete}>delete</a></td>
             <td>{this.props.picture.description}<img width="100" src={ApiSelector.Picture(this.props.picture.pictureId)}/></td>
           </tr>
         );

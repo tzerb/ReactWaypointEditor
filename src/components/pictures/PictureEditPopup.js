@@ -8,8 +8,8 @@ import {bindActionCreators} from 'redux';
 import toastr from 'toastr';
 import moment from 'moment';
 
-import TripForm from './TripForm';
-import * as tripActions from '../../actions/tripActions';
+import PictureForm from './PictureForm';
+import * as pictureActions from '../../actions/pictureActions';
 
 const customStyles = {
   content : {
@@ -21,14 +21,14 @@ const customStyles = {
     transform             : 'translate(-50%, -50%)'
   }
 };
-class TripEditPopup extends React.Component {
+class PictureEditPopup extends React.Component {
     constructor(props, context)
     {
         super(props, context);
 
         this.state = {
           modalIsOpen: false,
-          trip: Object.assign({}, this.props.trip),
+          picture: Object.assign({}, this.props.picture),
           errors: {},
           saving: false
         };
@@ -37,14 +37,14 @@ class TripEditPopup extends React.Component {
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
 
-        this.saveTrip = this.saveTrip.bind(this);
-        this.updateTripState = this.updateTripState.bind(this);        
+        this.savePicture = this.savePicture.bind(this);
+        this.updatePictureState = this.updatePictureState.bind(this);        
     }
 
   openModal() {
     this.setState(
         {modalIsOpen: true,
-        trip: Object.assign({}, this.props.trip),
+        picture: Object.assign({}, this.props.picture),
         errors: {},
         saving: false
         });
@@ -59,45 +59,46 @@ class TripEditPopup extends React.Component {
     this.setState({modalIsOpen: false});
   }
 
-  tripFormIsValid() {
+  pictureFormIsValid() {
     let formIsValid = true;
     let errors = {};
 
-    if (this.state.trip.title.length < 5) {
-      errors.title = 'Title must be at least 5 characters.';
+    if (this.state.picture.name.length < 2) {
+      errors.name = 'Name must be at least 2 characters.';
       formIsValid = false;
     }
 
-    if (!(moment(this.state.trip.dateTime, 'MM/DD/YYYY', true).isValid()))
+    if (!(moment(this.state.picture.dateTime).isValid()))
     {
       // TODO TZ do we need better name than 'DateTime'  (TripDate?)?!?
       errors.dateTime = 'DateTime is not valid.';
       formIsValid = false;
     }
+
     this.setState({errors: errors});
     return formIsValid;
   }
       
-  updateTripState(event) {
-    
+  updatePictureState(event) {
     const field = event.target.name;
-    let trip = this.state.trip;
-    trip[field] = event.target.value;
-    return this.setState({trip: trip});
+    let picture = this.state.picture;
+    picture[field] = event.target.value;
+    return this.setState({picture: picture});
   }
 
-  saveTrip(event) {
+  savePicture(event) {
     event.preventDefault();
-    if (!this.tripFormIsValid()) {
+    if (!this.pictureFormIsValid()) {
       return;
     }
 
     this.setState({saving: true});
-    this.props.tripActions.saveTrip(this.state.trip)
+    this.props.pictureActions.savePicture(this.state.picture)
       .then(() => { 
         this.closeModal();
         this.setState({saving: false});
-        toastr.success('Trip saved');
+        toastr.success('Picture saved');
+
       })
       .catch(error => {
         toastr.error(error);
@@ -115,10 +116,10 @@ class TripEditPopup extends React.Component {
                     onRequestClose={this.closeModal}
                     style={customStyles} >
 
-                    <TripForm 
-                        trip={this.state.trip}
-                        onChange={this.updateTripState}
-                        onSave={this.saveTrip}
+                    <PictureForm 
+                        picture={this.state.picture}
+                        onChange={this.updatePictureState}
+                        onSave={this.savePicture}
                         errors={this.state.errors}
                         saving={this.state.saving}
                     />
@@ -135,8 +136,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    tripActions: bindActionCreators(tripActions, dispatch)
+    pictureActions: bindActionCreators(pictureActions, dispatch)
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TripEditPopup);
+export default connect(mapStateToProps, mapDispatchToProps)(PictureEditPopup);

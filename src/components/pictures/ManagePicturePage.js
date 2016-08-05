@@ -83,9 +83,6 @@ export class ManagePicturePage extends React.Component {
   }
 
   render() {
-    // TODO TZ - remove debugging code.
-    toastr.warning('render');
-        
     return (
       <PictureForm
         picture={this.state.picture}

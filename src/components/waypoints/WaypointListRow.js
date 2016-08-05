@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import WaypointEditPopup from './WaypointEditPopup';
 
 class WaypointListRow extends React.Component {
     constructor(props, context)    {
@@ -23,7 +24,9 @@ class WaypointListRow extends React.Component {
     render() {
         return (
           <tr>
-            <td><Link to={'/waypoint/'+this.props.waypoint.waypointId}>edit</Link> <a onClick = {this.onLocalEdit}>edit</a> <a onClick = {this.onLocalDelete}>delete</a></td>
+            <td>
+              <WaypointEditPopup waypoint={this.props.waypoint}/> <a onClick = {this.onLocalEdit}>edit</a> <a onClick = {this.onLocalDelete}>delete</a>
+            </td>
             <td>{this.props.waypoint.name}</td>
           </tr>
         );

@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import TripEditPopup from './TripEditPopup';
 
 class TripListRow extends React.Component {
     constructor(props, context)    {
@@ -26,7 +27,7 @@ class TripListRow extends React.Component {
           <tr>
             <td><Link to={'/tripview/' + this.props.trip.tripId}>{this.props.trip.title}</Link></td>
             <td>{this.props.trip.description}</td>
-            <td><Link to={'/trip/' + this.props.trip.tripId}>edit</Link> | <a onClick={this.onLocalDelete}>delete</a></td>
+            <td><TripEditPopup trip={this.props.trip}/> | <a onClick={this.onLocalDelete}>delete</a></td>
           </tr>
         );
     }

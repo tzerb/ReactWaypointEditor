@@ -10,7 +10,6 @@ class SingletonMap {
     {
         this.loaded = false;
         let _this = this;
-        // toastr.success('SingletonMap constructor');
 
         this.Markers = [];  
         GoogleMapsLoader.KEY = 'AIzaSyCG_KuXMd6mrgAzrRcgXr91Yr6Ed03VNaw';
@@ -81,7 +80,6 @@ class SingletonMap {
     
     appendMap(parentElement, deleteFunction, insertFunction, editFunction, zoomChangedFunction, positionChangedFunction)
     {
-        toastr.success('appendMap')
         let mapElement = document.getElementById("map_canvas");
         if (mapElement != null && parentElement != null) {
             mapElement.style.display='block';
@@ -130,7 +128,6 @@ class Map5 extends React.Component {
     }
 
 	componentDidMount(prevProps,  prevState) {
-        // toastr.success('componentDidMount');
         _SingletonMap.appendMap2(this.deleteWaypoint, this.insertWaypoint, this.editWaypoint, this.zoomChangedFunction, this.positionChangedFunction);
     }
 
@@ -168,8 +165,6 @@ class Map5 extends React.Component {
 
     setElement(c)
     {
-        //toastr.success('set element ' + c);
-        // _SingletonMap._mapElement=c;
         _SingletonMap.appendMap(c, this.deleteWaypoint, this.insertWaypoint, this.editWaypoint, this.zoomChangedFunction, this.positionChangedFunction);
     }
 
@@ -192,7 +187,6 @@ class Map5 extends React.Component {
  
     addMarkers2()
     { 
-        //toastr.success('addMarkers2 map5 - ' + this.props.waypoints.length);
         _SingletonMap.clearMarkers();
         //this.addMyMarker();
        // debugger;
@@ -202,13 +196,11 @@ class Map5 extends React.Component {
             {
                 let wp = this.props.waypoints[i];
                 _SingletonMap.addMarker(wp.name, wp.latitude, wp.longitude, wp);
-                toastr.success(wp.name);
             }
         }
     }  
  
     render() {
-        toastr.success('render map5');
         _SingletonMap.clearMarkers();
         this.addMarkers2(); 
         return (

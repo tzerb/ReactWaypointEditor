@@ -28,7 +28,7 @@ export class TripView extends React.Component {
       errors: {},
       saving: false
     };
-    this.onEditWaypoint = this.onEditWaypoint.bind(this);
+    //this.onEditWaypoint = this.onEditWaypoint.bind(this);
     this.onDeleteWaypoint = this.onDeleteWaypoint.bind(this);
 
     this.onEditPicture = this.onEditPicture.bind(this);
@@ -36,9 +36,6 @@ export class TripView extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // TODO TZ - remove debugging code.
-    toastr.success('TripView.componentWillReceiveProps');
-    
     if (this.props.trip.tripId != nextProps.trip.tripId) {
       // Necessary to populate form when existing trip is loaded directly.
       this.setState({trip: Object.assign({}, nextProps.trip)});
@@ -52,13 +49,9 @@ export class TripView extends React.Component {
   
   onDeletePicture(picture)
   {
-    // alert('delete picture-' + picture.pictureId);
-    toastr.success('picture delete START (# pictures on this trip=' + this.props.trip.pictures.length);
-    
     this.props.pictureActions.deletePicture(picture)
       .then(() => { 
-                // TODO TZ - remove debugging code.
-                toastr.success('picture deleted (# pictures on this trip=' + this.props.trip.pictures.length);
+              toastr.success('Picture deleted');
             })
             .catch(error => {
                 toastr.error(error);
@@ -66,19 +59,11 @@ export class TripView extends React.Component {
             });    
   }
 
-  onEditWaypoint(waypoint)
-  {
-    alert('edit waypoint-' + waypoint.waypointId);
-  }
-  
   onDeleteWaypoint(waypoint)
   {
-    toastr.success('waypoint delete START (# waypoints on this trip=' + this.props.trip.waypoints.length);
-    
     this.props.waypointActions.deleteWaypoint(waypoint)
       .then(() => { 
-                // TODO TZ - remove debugging code.
-                toastr.success('waypoint deleted (# waypoints on this trip=' + this.props.trip.waypoints.length);
+              toastr.success('Waypoint deleted');
             })
             .catch(error => {
                 toastr.error(error);
@@ -92,7 +77,8 @@ export class TripView extends React.Component {
         <div className=""> 
           <div className="row">
             <TripHeader trip={this.props.trip}/>
-            <TripEditPopup trip={this.props.trip}/>
+            <div><TripEditPopup trip={this.props.trip}/></div>
+            <div>&nbsp;</div>
             <div className="col-md-5 well">
               <WaypointList waypoints={this.props.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
               <Link to={'/waypoint/?tripId=' + this.props.trip.tripId}>Add Waypoint</Link>
