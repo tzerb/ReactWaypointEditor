@@ -87,8 +87,7 @@ export class TripView extends React.Component {
   }
 
   render() {
-    // TODO TZ - remove debugging code.
-    //toastr.warning('render');
+    // TODO TZ - make this more general, probably in WebApi
     for(let i=0; i<this.props.trip.pictures.length; i++)
     {
       this.props.trip.pictures[i].src = ApiHelpers.pictureURL(this.props.trip.pictures[i]);

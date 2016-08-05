@@ -17,11 +17,6 @@ let LightboxView =  React.createClass({
             isOpen: false
         };
     },
-    componentWillReceiveProps: function(nextProps) {
-      // TODO TZ - remove debugging code.
-
-      debugger;      
-    },
     openLightbox: function() {
         this.setState({ isOpen: true });
     },
