@@ -78,7 +78,14 @@ export class ManageWaypointPage extends React.Component {
   redirect() {
     this.setState({saving: false});
     toastr.success('waypoint saved.');
-    this.context.router.push('/tripview/' + this.props.location.query.tripId);
+
+    // TripId if we're coming from ManageWaypointPage'
+    let tripId = this.state.waypoint.tripId;
+
+    // TripId if we're coming from the map page' 
+    if (this.props.location.query.tripId)
+      tripId = this.props.location.query.tripId;
+    this.context.router.push('/tripview/' + tripId);
   }
 
   render() {

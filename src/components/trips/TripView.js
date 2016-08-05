@@ -17,6 +17,7 @@ import WaypointList from '../waypoints/WaypointList';
 import PictureList from '../pictures/PictureList';
 import ApiConfig from '../../api/ApiConfig';
 import ApiHelpers from '../../api/ApiHelpers';
+import TripEditPopup from './TripEditPopup';
 
 export class TripView extends React.Component {
   constructor(props, context) {
@@ -72,7 +73,6 @@ export class TripView extends React.Component {
   
   onDeleteWaypoint(waypoint)
   {
-    // TODO TZ - remove debugging code.
     toastr.success('waypoint delete START (# waypoints on this trip=' + this.props.trip.waypoints.length);
     
     this.props.waypointActions.deleteWaypoint(waypoint)
@@ -87,16 +87,12 @@ export class TripView extends React.Component {
   }
 
   render() {
-    // TODO TZ - make this more general, probably in WebApi
-    for(let i=0; i<this.props.trip.pictures.length; i++)
-    {
-      this.props.trip.pictures[i].src = ApiHelpers.pictureURL(this.props.trip.pictures[i]);
-    }
     try {
       return (   
         <div className=""> 
           <div className="row">
             <TripHeader trip={this.props.trip}/>
+            <TripEditPopup trip={this.props.trip}/>
             <div className="col-md-5 well">
               <WaypointList waypoints={this.props.trip.waypoints} onEdit={this.onEditWaypoint} onDelete={this.onDeleteWaypoint}/>
               <Link to={'/waypoint/?tripId=' + this.props.trip.tripId}>Add Waypoint</Link>
@@ -121,12 +117,6 @@ export class TripView extends React.Component {
             </div>
           </div>
           }     
-          <div className="row">
-            <div className="col-md-12 well">
-              <div>Lightbox View</div>
-              
-            </div>
-          </div>               
         </div>
       );
     }
