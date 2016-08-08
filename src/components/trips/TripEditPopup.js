@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, {PropTypes} from 'react';
 import  Modal from 'react-modal';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
@@ -19,6 +18,9 @@ const customStyles = {
     bottom                : 'auto',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)'
+  },
+  overlay : {
+    backgroundColor : 'rgba(127, 127, 127, 0.7'
   }
 };
 class TripEditPopup extends React.Component {
@@ -127,6 +129,11 @@ class TripEditPopup extends React.Component {
         );
     }
 }
+
+TripEditPopup.propTypes = {
+  trip: PropTypes.object.isRequired,
+  tripActions: PropTypes.object.isRequired
+};
 
 function mapStateToProps(state, ownProps) {
   return {

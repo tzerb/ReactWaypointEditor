@@ -45,14 +45,13 @@ const generateId = (picture) => {
   return maxPictureId+1;
 };
 
-// const generateId = (trip) => {
-//   return replaceAll(trip.title, ' ', '-');
+// const generateId = (picture) => {
+//   return replaceAll(picture.title, ' ', '-');
 // };
 
-class TripApi {
+class PictureApi {
 
   static getAllPictures() {
-    //alert('getAllPictures');
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(Object.assign([], pictures));
@@ -60,42 +59,42 @@ class TripApi {
     });
   }
 
-  static saveTrip(trip) {
-    trip = Object.assign({}, trip); // to avoid manipulating object passed in.
+  static savePicture(picture) {
+    picture = Object.assign({}, picture); // to avoid manipulating object passed in.
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         // Simulate server-side validation
-        const minTripTitleLength = 1;
-        if (trip.title.length < minTripTitleLength) {
-          reject(`Title must be at least ${minTripTitleLength} characters.`);
+        const minPictureNameLength = 1;
+        if (picture.name.length < minPictureNameLength) {
+          reject(`Name must be at least ${minPictureNameLength} characters.`);
         }
-        if (trip.tripId) {
-          const existingTripIndex = pictures.findIndex(a => a.tripId == trip.tripId);
-          pictures.splice(existingTripIndex, 1, trip);
+        if (picture.pictureId) {
+          const existingPictureIndex = pictures.findIndex(a => a.pictureId == picture.pictureId);
+          pictures.splice(existingPictureIndex, 1, picture);
         } else {
           //Just simulating creation here.
           //The server would generate ids and watchHref's for new pictures in a real app.
           //Cloning so copy returned is passed by value rather than by reference.
-          trip.tripId = generateId(trip);
-          pictures.push(trip);
+          picture.pictureId = generateId(picture);
+          pictures.push(picture);
         }
 
-        resolve(trip);
+        resolve(picture);
       }, delay);
     });
   }
 
-  static deleteTrip(tripId) {
+  static deletePicture(pictureId) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        const indexOfTripToDelete = pictures.findIndex(trip => {
-          trip.tripId == tripId;
+        const indexOfPictureToDelete = pictures.findIndex(picture => {
+          picture.pictureId == pictureId;
         });
-        pictures.splice(indexOfTripToDelete, 1);
+        pictures.splice(indexOfPictureToDelete, 1);
         resolve();
       }, delay);
     });
   }
 }
 
-export default TripApi;
+export default PictureApi;

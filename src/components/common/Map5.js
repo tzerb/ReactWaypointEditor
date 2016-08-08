@@ -115,12 +115,13 @@ class SingletonMap {
 
 }
 
-const _SingletonMap = new SingletonMap();
+let _SingletonMap = null;
 
 class Map5 extends React.Component {
     constructor(props, context) {
         super(props, context);
 
+        _SingletonMap = new SingletonMap();
         this.setElement = this.setElement.bind(this);
         this.addMyMarker = this.addMyMarker.bind(this);
         this.addMarkers2 = this.addMarkers2.bind(this);

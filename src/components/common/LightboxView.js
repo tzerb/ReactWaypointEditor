@@ -6,10 +6,10 @@ let images = [
 
 let LightboxView =  React.createClass({
     getInitialState: function() {
-        var x = this.props.pictures;
+        let x = this.props.pictures;
         for(let i=0; i<this.props.pictures.length; i++)
         {
-            images.push(this.props.pictures[i].src)
+            images.push(this.props.pictures[i].src);
         }
           
         return {
@@ -31,7 +31,7 @@ let LightboxView =  React.createClass({
     },
     render: function() {
     
-        var lightbox = '';
+        let lightbox = '';
         if (this.state.isOpen) {
             lightbox = (
                 <Lightbox
@@ -57,7 +57,7 @@ let LightboxView =  React.createClass({
 });
 
 LightboxView.propTypes = {
-  images: PropTypes.array.isRequired
+  pictures: PropTypes.array.isRequired
 };
 
 export default LightboxView;

@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, {PropTypes} from 'react';
 import  Modal from 'react-modal';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
@@ -19,6 +18,9 @@ const customStyles = {
     bottom                : 'auto',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)'
+  },
+  overlay : {
+    backgroundColor : 'rgba(127, 127, 127, 0.7'
   }
 };
 class PictureEditPopup extends React.Component {
@@ -52,7 +54,7 @@ class PictureEditPopup extends React.Component {
 
   afterOpenModal() {
     // references are now sync'd and can be accessed.
-    this.refs.subtitle.style.color = '#f00';
+    //this.refs.subtitle.style.color = '#f00';
   }
 
   closeModal() {
@@ -128,6 +130,11 @@ class PictureEditPopup extends React.Component {
         );
     }
 }
+
+PictureEditPopup.propTypes = {
+  picture: PropTypes.object.isRequired,
+  pictureActions: PropTypes.object.isRequired
+};
 
 function mapStateToProps(state, ownProps) {
   return {

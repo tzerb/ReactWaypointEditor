@@ -29,7 +29,8 @@ export function deletePictureWaypointSuccess(picture, waypoint)
 
 export function loadPictures() {
     return function (dispatch){
-        return ApiSelector.PictureApi().getAllPictures().then(pictures => {
+        let picApi = ApiSelector.PictureApi();
+        return picApi.getAllPictures().then(pictures => {
             dispatch(loadPictureSuccess(pictures));
         }).catch (error => {
             throw(error);
@@ -40,7 +41,8 @@ export function loadPictures() {
 export function savePicture(picture) {
   return function (dispatch, getState) {
     dispatch(beginAjaxCall());
-    return ApiSelector.PictureApi().savePicture(picture).then(picture => {
+    let pictureApi = ApiSelector.PictureApi();
+    return pictureApi.savePicture(picture).then(picture => {
         if (picture.pictureId)
         {
             dispatch(updatePictureSuccess(picture));

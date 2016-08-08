@@ -103,7 +103,8 @@ export class ManageWaypointPage extends React.Component {
 
 ManageWaypointPage.propTypes = {
   waypoint: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  location: PropTypes.object
 };
 
 //Pull in the React Router context so router is available on this.context.router.
