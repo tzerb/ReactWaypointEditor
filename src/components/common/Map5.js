@@ -3,6 +3,7 @@ import toastr from 'toastr';
 import WaypointListRow from '../waypoints/WaypointListRow';
 import GoogleMapsLoader from 'google-maps';
 import ApiConfig from '../../api/ApiConfig';
+import Hello from './Hello';
 
 class SingletonMap {
 
@@ -210,6 +211,7 @@ class Map5 extends React.Component {
                 <div className="col-md-12">
                     <div id="map_canvas4"  ref={this.setElement}></div>
                 </div>
+                <Hello/>
             </div>
         );
     }
