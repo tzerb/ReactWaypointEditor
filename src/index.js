@@ -10,6 +10,7 @@ import {loadWaypoints} from './actions/waypointActions';
 import {loadPictures} from './actions/pictureActions';
  
 import './styles/styles.css'; //Webpack can import CSS files too!
+import './styles/styles2.css'; //Webpack can import CSS files too!
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/toastr/build/toastr.min.css';
 

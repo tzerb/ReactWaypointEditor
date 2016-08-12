@@ -205,11 +205,9 @@ class Map5 extends React.Component {
         _SingletonMap.clearMarkers();
         this.addMarkers2(); 
         return (
-            <div className="row" >
-                {false && this.props.waypoints && (this.props.waypoints.length > 0) && <button onClick={this.addMarkers2}>click</button>}
-                <div className="col-md-12">
+            <div>
+                    {false && this.props.waypoints && (this.props.waypoints.length > 0) && <button onClick={this.addMarkers2}>click</button>}
                     <div id="map_canvas4"  ref={this.setElement}></div>
-                </div>
             </div>
         );
     }
